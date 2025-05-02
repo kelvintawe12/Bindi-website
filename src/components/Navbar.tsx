@@ -21,20 +21,32 @@ export function Navbar() {
           <Link to="/about" className="font-medium hover:text-yellow-500 transition-colors">
             About
           </Link>
-          <Link to="/services" className="font-medium hover:text-yellow-500 transition-colors">
-            Services
+          <Link to="/donate" className="font-medium hover:text-yellow-500 transition-colors">
+            Donate
           </Link>
-          <Link to="/process" className="font-medium hover:text-yellow-500 transition-colors">
-            Our Process
+          <Link to="/volunteer" className="font-medium hover:text-yellow-500 transition-colors">
+            Volunteer
           </Link>
-          <Link to="/portfolio" className="font-medium hover:text-yellow-500 transition-colors">
-            Portfolio
+          <Link to="/impact" className="font-medium hover:text-yellow-500 transition-colors">
+            Impact
+          </Link>
+          <Link to="/blog" className="font-medium hover:text-yellow-500 transition-colors">
+            Blog
           </Link>
           <Link to="/contact" className="font-medium hover:text-yellow-500 transition-colors">
             Contact
           </Link>
-          <Link to="/bindi-initiative" className="font-medium hover:text-yellow-500 transition-colors">
-            Bindi Initiative
+          <Link to="/stories" className="font-medium hover:text-yellow-500 transition-colors">
+            Stories
+          </Link>
+          <Link to="/events" className="font-medium hover:text-yellow-500 transition-colors">
+            Events
+          </Link>
+          <Link to="/partners" className="font-medium hover:text-yellow-500 transition-colors">
+            Partners
+          </Link>
+          <Link to="/resources" className="font-medium hover:text-yellow-500 transition-colors">
+            Resources
           </Link>
         </nav>
         <div className="hidden md:block">
