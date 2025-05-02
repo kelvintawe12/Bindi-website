@@ -1,35 +1,41 @@
 import React, { useState } from 'react';
 import { MenuIcon, XIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Logo } from './common/Logo';
 import { Button } from './common/Button';
+
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
-  return <header className="sticky top-0 z-50 bg-blue-900 text-white shadow-md">
+  return (
+    <header className="sticky top-0 z-50 bg-blue-900 text-white shadow-md">
       <div className="container mx-auto px-4 py-4 flex justify-between items-center">
         <Logo />
         {/* Desktop Navigation */}
         <nav className="hidden md:flex space-x-8">
-          <a href="#" className="font-medium hover:text-yellow-500 transition-colors">
+          <Link to="/" className="font-medium hover:text-yellow-500 transition-colors">
             Home
-          </a>
-          <a href="#" className="font-medium hover:text-yellow-500 transition-colors">
+          </Link>
+          <Link to="/about" className="font-medium hover:text-yellow-500 transition-colors">
             About
-          </a>
-          <a href="#" className="font-medium hover:text-yellow-500 transition-colors">
+          </Link>
+          <Link to="/services" className="font-medium hover:text-yellow-500 transition-colors">
             Services
-          </a>
-          <a href="#" className="font-medium hover:text-yellow-500 transition-colors">
+          </Link>
+          <Link to="/process" className="font-medium hover:text-yellow-500 transition-colors">
             Our Process
-          </a>
-          <a href="#" className="font-medium hover:text-yellow-500 transition-colors">
+          </Link>
+          <Link to="/portfolio" className="font-medium hover:text-yellow-500 transition-colors">
             Portfolio
-          </a>
-          <a href="#" className="font-medium hover:text-yellow-500 transition-colors">
+          </Link>
+          <Link to="/contact" className="font-medium hover:text-yellow-500 transition-colors">
             Contact
-          </a>
+          </Link>
+          <Link to="/bindi-initiative" className="font-medium hover:text-yellow-500 transition-colors">
+            Bindi Initiative
+          </Link>
         </nav>
         <div className="hidden md:block">
           <Button variant="primary">Donate</Button>
@@ -40,30 +46,36 @@ export function Navbar() {
         </button>
       </div>
       {/* Mobile Navigation */}
-      {isMenuOpen && <div className="md:hidden bg-blue-900 pb-4">
+      {isMenuOpen && (
+        <div className="md:hidden bg-blue-900 pb-4">
           <nav className="flex flex-col space-y-3 px-4">
-            <a href="#" className="font-medium hover:text-yellow-500 transition-colors py-2">
+            <Link to="/" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Home
-            </a>
-            <a href="#" className="font-medium hover:text-yellow-500 transition-colors py-2">
+            </Link>
+            <Link to="/about" className="font-medium hover:text-yellow-500 transition-colors py-2">
               About
-            </a>
-            <a href="#" className="font-medium hover:text-yellow-500 transition-colors py-2">
+            </Link>
+            <Link to="/services" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Services
-            </a>
-            <a href="#" className="font-medium hover:text-yellow-500 transition-colors py-2">
+            </Link>
+            <Link to="/process" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Our Process
-            </a>
-            <a href="#" className="font-medium hover:text-yellow-500 transition-colors py-2">
+            </Link>
+            <Link to="/portfolio" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Portfolio
-            </a>
-            <a href="#" className="font-medium hover:text-yellow-500 transition-colors py-2">
+            </Link>
+            <Link to="/contact" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Contact
-            </a>
+            </Link>
+            <Link to="/bindi-initiative" className="font-medium hover:text-yellow-500 transition-colors py-2">
+              Bindi Initiative
+            </Link>
             <Button variant="primary" className="w-full text-left">
               Donate
             </Button>
           </nav>
-        </div>}
-    </header>;
+        </div>
+      )}
+    </header>
+  );
 }

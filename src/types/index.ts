@@ -5,6 +5,7 @@ export interface Service {
   icon: JSX.Element;
   link: string;
 }
+
 export interface Testimonial {
   id: string;
   text: string;
@@ -12,6 +13,7 @@ export interface Testimonial {
   position: string;
   image?: string;
 }
+
 export interface PortfolioItem {
   id: string;
   title: string;
@@ -20,6 +22,7 @@ export interface PortfolioItem {
   image: string;
   metrics?: string[];
 }
+
 export interface ContactForm {
   name: string;
   email: string;
@@ -27,4 +30,50 @@ export interface ContactForm {
   company?: string;
   service: string;
   message: string;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  excerpt: string;
+  category: string;
+  author: string;
+  date: string;
+  image: string;
+  slug: string;
+}
+
+export interface ImpactStory {
+  id: string;
+  title: string;
+  content: string;
+  image: string;
+  quote: string;
+  type?: 'Beneficiary' | 'Donor';
+  community?: 'Musanze' | 'Kibeho';
+}
+
+export interface Event {
+  id: string;
+  title: string;
+  date: string;
+  time: string;
+  location: string;
+  description: string;
+}
+
+export interface Partner {
+  id: string;
+  name: string;
+  description: string;
+  logo: string;
+  website: string;
+}
+
+export interface Resource {
+  id: string;
+  title: string;
+  description: string;
+  category: 'Guides' | 'Activities' | 'Tips';
+  link: string;
 }

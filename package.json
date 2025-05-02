@@ -10,11 +10,16 @@
     "preview": "npx vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.0.1",
     "axios": "^1.7.7",
+    "framer-motion": "^12.9.4",
     "lucide-react": "^0.441.0",
     "msw": "latest",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-calendar": "^5.1.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.5.3",
+    "zod": "^3.24.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.18",
