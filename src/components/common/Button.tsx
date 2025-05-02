@@ -2,7 +2,7 @@ import React from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface ButtonProps {
-  variant?: 'primary' | 'outline' | 'gradient';
+  variant?: 'yellow' | 'red' | 'white' | 'navy' | 'primary' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   href?: string;
   type?: 'button' | 'submit' | 'reset';
@@ -15,7 +15,7 @@ interface ButtonProps {
 
 export const Button: React.FC<ButtonProps> = React.memo(
   ({
-    variant = 'primary',
+    variant = 'yellow',
     size = 'md',
     href,
     type = 'button',
@@ -26,17 +26,19 @@ export const Button: React.FC<ButtonProps> = React.memo(
     external = false,
   }) => {
     const baseStyles =
-      'font-poppins font-semibold rounded-lg transition-all duration-300 focus:outline-none focus:ring-4 focus:ring-green-300 disabled:opacity-50 disabled:cursor-not-allowed';
+      'font-poppins font-medium rounded-md transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-yellow-300 disabled:opacity-50 disabled:cursor-not-allowed';
     const variantStyles = {
-      primary: 'bg-green-600 text-white hover:bg-green-700',
-      outline: 'border-2 border-green-600 text-green-600 hover:bg-green-50',
-      gradient:
-        'bg-gradient-to-r from-green-500 to-blue-600 text-white hover:from-green-600 hover:to-blue-700 shadow-glow',
+      yellow: 'bg-yellow-400 text-navy-800 hover:bg-yellow-500 hover:border-yellow-600 border border-transparent',
+      red: 'bg-red-500 text-white hover:bg-red-600 hover:border-red-700 border border-transparent',
+      white: 'bg-white text-navy-800 hover:bg-gray-100 hover:border-yellow-400 border border-yellow-400',
+      navy: 'bg-navy-800 text-white hover:bg-navy-900 hover:border-navy-700 border border-transparent',
+      primary: 'bg-primary-600 text-white hover:bg-primary-700 border border-transparent',
+      outline: 'bg-transparent text-primary-600 border border-primary-600 hover:bg-primary-50',
     };
     const sizeStyles = {
-      sm: 'px-3 py-1.5 text-sm',
-      md: 'px-5 py-2.5 text-base',
-      lg: 'px-7 py-3.5 text-lg',
+      sm: 'px-2.5 py-1 text-xs',
+      md: 'px-4 py-1.5 text-sm',
+      lg: 'px-6 py-2 text-base',
     };
 
     const classes = twMerge(`${baseStyles} ${variantStyles[variant]} ${sizeStyles[size]}`, className);

@@ -1,387 +1,375 @@
-import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useMemo } from 'react';
+import { motion, useInView } from 'framer-motion';
 import CountUp from 'react-countup';
 import { Button } from '../components/common/Button';
-import { BookOpen, MapPin, Globe, ArrowRight } from 'lucide-react';
+import { BookOpen, MapPin, ArrowRight, ArrowDown } from 'lucide-react';
 import Head from 'next/head';
 
+// Hero image (Pexels)
+const heroImage = {
+  url: 'https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg',
+  alt: 'Children reading books in a classroom',
+};
+
+// Animation variants
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
+const scaleIn = {
+  hidden: { opacity: 0, scale: 0.98 },
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+};
+
 const About: React.FC = () => {
-  const slideshowImages = [
-    {
-      url: 'https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg',
-      alt: 'Children reading books',
-    },
-    {
-      url: 'https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg',
-      alt: 'Rwandan classroom',
-    },
-    {
-      url: 'https://images.pexels.com/photos/1205651/pexels-photo-1205651.jpeg',
-      alt: 'Literacy event in Rwanda',
-    },
-  ];
+  // Stats section
+  const statsRef = React.useRef(null);
+  const isStatsInView = useInView(statsRef, { once: true });
+  const stats = useMemo(
+    () => [
+      { value: 850, label: 'Books Collected', suffix: '' },
+      { value: 400, label: 'Children Reached', suffix: '+' },
+      { value: 3, label: 'Schools Served', suffix: '' },
+    ],
+    []
+  );
 
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % slideshowImages.length);
-    }, 6000); // Change every 6 seconds
-    return () => clearInterval(interval);
-  }, [slideshowImages.length]);
-
-  const handleDotClick = (index: number) => {
-    setCurrentImageIndex(index);
-  };
-
-  const stats = [
-    { value: 850, label: 'Books Collected', suffix: '' },
-    { value: 400, label: 'Children Reached', suffix: '+' },
-    { value: 3, label: 'Schools Served', suffix: '' },
-  ];
+  // Respect prefers-reduced-motion
+  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   return (
     <>
       <Head>
         <title>Bindi Literacy Initiative | About</title>
         <meta name="description" content="Discover Bindi’s journey from Cameroon to Rwanda, empowering youth through literacy." />
+        <link rel="preload" href={heroImage.url} as="image" />
       </Head>
-      <main className="bg-gray-50">
-        {/* Hero Section with Slideshow */}
-        <section className="relative min-h-[90vh] flex items-center justify-center bg-gray-900 text-white overflow-hidden">
+      <main className="bg-white">
+        {/* Hero Section */}
+        <section
+          className="relative min-h-[90vh] flex items-center justify-center bg-navy-800 text-white overflow-hidden"
+          role="region"
+          aria-label="Hero section"
+          aria-describedby="hero-description"
+        >
           <div className="absolute inset-0 z-0">
-            {slideshowImages.map((image, index) => (
-              <motion.img
-                key={image.url}
-                src={image.url}
-                alt={image.alt}
-                className="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000"
-                style={{ opacity: index === currentImageIndex ? 1 : 0 }}
-                loading="lazy"
-              />
-            ))}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/50"></div>
+            <img
+              src={heroImage.url}
+              alt={heroImage.alt}
+              className="w-full h-full object-cover rounded-xl"
+              loading="eager"
+              onError={(e) => (e.currentTarget.src = 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg')}
+            />
+            <div className="absolute inset-0 bg-navy-800/50"></div>
           </div>
-          <div className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+          <div className="relative z-10 text-center px-6 sm:px-8 lg:px-12 max-w-7xl mx-auto">
             <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1 }}
-              className="text-4xl sm:text-5xl lg:text-6xl font-bold font-poppins mb-6 drop-shadow-2xl tracking-tight"
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-poppins mb-6 text-white relative after:content-[''] after:block after:w-24 after:h-1 after:bg-yellow-400 after:mx-auto after:mt-4"
             >
-              Bindi: Empowering Through Education
+              Empowering Futures Through Literacy
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.3 }}
-              className="text-lg sm:text-xl lg:text-2xl font-poppins text-gray-200 max-w-3xl mx-auto mb-10 leading-loose"
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.2 }}
+              className="text-lg sm:text-xl lg:text-2xl font-poppins text-gray-200 max-w-3xl mx-auto mb-10 leading-relaxed"
+              id="hero-description"
             >
-              From Cameroon’s classrooms to Rwanda’s future, we’re building a literacy movement.
+              Bindi Literacy Initiative transforms lives by bringing books and education to children in Cameroon and Rwanda.
             </motion.p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <motion.div
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.4 }}
+              className="flex flex-row justify-center gap-4 flex-wrap"
+            >
               <Button
                 href="/donate"
-                variant="gradient"
-                size="lg"
+                variant="yellow"
+                size="md"
                 ariaLabel="Donate books to Bindi"
-                className="transform hover:scale-105 transition-all shadow-lg"
+                className="hover:scale-105 min-w-[140px] max-w-[200px]"
               >
                 Donate Books
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
               <Button
                 href="/volunteer"
-                variant="outline"
-                size="lg"
+                variant="red"
+                size="md"
                 ariaLabel="Volunteer with Bindi"
-                className="border-green-300 text-green-300 hover:bg-green-300 hover:text-gray-900 transform hover:scale-105 transition-all shadow-lg"
+                className="hover:scale-105 min-w-[140px] max-w-[200px]"
               >
                 Volunteer Now
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
               <Button
-                href="#mission"
-                variant="gradient"
-                size="lg"
+                href="#impact"
+                variant="white"
+                size="md"
                 ariaLabel="Learn more about Bindi’s mission"
-                className="transform hover:scale-105 transition-all shadow-lg"
+                className="hover:scale-105 min-w-[140px] max-w-[200px]"
               >
                 Learn More
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
-            </div>
-            {/* Slideshow Navigation Dots */}
-            <div className="absolute bottom-8 left-0 right-0 flex justify-center gap-3">
-              {slideshowImages.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => handleDotClick(index)}
-                  className={`h-3 w-3 rounded-full transition-all duration-300 ${
-                    index === currentImageIndex ? 'bg-green-400 scale-125' : 'bg-gray-400'
-                  }`}
-                  aria-label={`Go to slide ${index + 1}`}
-                ></button>
-              ))}
-            </div>
+            </motion.div>
+            <motion.a
+              href="#impact"
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              transition={{ delay: 0.6 }}
+              className="absolute bottom-8 left-0 right-0 mx-auto text-white hover:text-yellow-400 transition-colors"
+              aria-label="Scroll to Impact section"
+            >
+              <ArrowDown className="h-8 w-8 animate-bounce" />
+            </motion.a>
           </div>
         </section>
 
-        {/* Stats Section */}
+        {/* Impact Section */}
         <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="py-16 bg-gradient-to-b from-gray-100 to-white"
+          id="impact"
+          ref={statsRef}
+          initial="hidden"
+          animate={isStatsInView ? 'visible' : 'hidden'}
+          variants={fadeInUp}
+          className="py-24 bg-yellow-100"
+          aria-describedby="impact-description"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-bold font-poppins text-gray-800 text-center mb-12">
-              Our Impact at a Glance
-            </h2>
+          <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-7xl">
+            <motion.h2
+              variants={fadeInUp}
+              initial="hidden"
+              animate="visible"
+              className="text-3xl sm:text-4xl font-extrabold font-poppins text-navy-800 text-center mb-12"
+            >
+              Our Impact in Numbers
+            </motion.h2>
+            <p className="hidden" id="impact-description">
+              Statistics showcasing Bindi’s contributions to literacy and education.
+            </p>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
               {stats.map((stat, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.5, delay: index * 0.2 }}
-                  className="bg-white rounded-xl shadow-lg p-8 text-center transform hover:shadow-xl transition-all"
+                  variants={scaleIn}
+                  initial="hidden"
+                  animate={isStatsInView ? 'visible' : 'hidden'}
+                  transition={{ delay: index * 0.2 }}
+                  className="bg-white border border-yellow-400 rounded-xl p-8 text-center shadow-md hover:shadow-lg hover:-translate-y-1 transition-all"
+                  aria-label={`${stat.label}: ${stat.value}${stat.suffix}`}
                 >
-                  <CountUp
-                    start={0}
-                    end={stat.value}
-                    duration={2.5}
-                    suffix={stat.suffix}
-                    className="text-4xl font-bold font-poppins text-green-600"
-                  />
-                  <p className="text-gray-600 font-poppins text-lg mt-2">{stat.label}</p>
+                  {isStatsInView && !reduceMotion ? (
+                    <CountUp
+                      start={0}
+                      end={stat.value}
+                      duration={2.5}
+                      suffix={stat.suffix}
+                      className="text-5xl font-bold font-poppins text-red-500"
+                    />
+                  ) : (
+                    <span className="text-5xl font-bold font-poppins text-red-500">
+                      {stat.value}{stat.suffix}
+                    </span>
+                  )}
+                  <p className="text-gray-600 font-poppins text-lg mt-3">{stat.label}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </motion.section>
 
-        {/* Mission Section */}
+        {/* Our Story Section */}
         <motion.section
-          id="mission"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="py-20 bg-white"
+          id="story"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
+          className="py-24 bg-white"
+          aria-describedby="story-description"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col lg:flex-row gap-12 items-center">
+          <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-7xl">
+            <motion.h2
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              className="text-3xl sm:text-4xl font-extrabold font-poppins text-navy-800 text-center mb-16"
+            >
+              Our Story
+            </motion.h2>
+            <p className="hidden" id="story-description">
+              The journey of Bindi Literacy Initiative from Cameroon to Rwanda.
+            </p>
+
+            {/* Cameroon Subsection */}
+            <div className="flex flex-col lg:flex-row gap-12 items-center mb-20">
               <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ delay: 0.2 }}
                 className="lg:w-1/2"
               >
                 <div className="flex items-center mb-6">
-                  <BookOpen className="h-12 w-12 text-green-600 mr-4 transform hover:scale-110 transition-transform" />
-                  <h2 className="text-3xl sm:text-4xl font-bold font-poppins text-gray-800">
-                    Our Roots in Cameroon
-                  </h2>
+                  <BookOpen className="h-10 w-10 text-red-500 mr-4 hover:animate-spin" />
+                  <h3 className="text-2xl sm:text-3xl font-bold font-poppins text-navy-800">
+                    Roots in Cameroon
+                  </h3>
                 </div>
-                <p className="text-gray-600 font-poppins text-lg leading-loose mb-6">
-                  Bindi began as an educational venture creating culturally relevant activity and coloring books for children in Cameroon. Our engaging materials sparked creativity and learning, setting the stage for our expansion into Rwanda to tackle literacy challenges head-on.
+                <p className="text-gray-600 font-poppins text-lg leading-relaxed mb-6 max-w-prose">
+                  Bindi started in Cameroon, crafting culturally relevant activity and coloring books that ignited creativity and learning among children. This foundation paved the way for our broader mission.
                 </p>
-                <div className="flex gap-4">
-                  <Button
-                    href="/stories"
-                    variant="gradient"
-                    size="md"
-                    ariaLabel="Read stories from Bindi’s journey"
-                    className="transform hover:scale-105 transition-all"
-                  >
-                    Read Stories
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                  <Button
-                    href="#rwanda"
-                    variant="outline"
-                    size="md"
-                    ariaLabel="Learn about Bindi’s work in Rwanda"
-                    className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
-                  >
-                    Next Chapter
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
-                </div>
+                <a
+                  href="/stories"
+                  className="text-navy-800 font-poppins text-lg underline hover:text-yellow-400 transition-colors"
+                  aria-label="Read stories from Bindi’s journey in Cameroon"
+                >
+                  Learn More
+                </a>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
+                variants={scaleIn}
+                initial="hidden"
+                whileInView="visible"
                 className="lg:w-1/2"
               >
                 <img
-                  src="https://images.pexels.com/photos/256417/pexels-photo-256417.jpeg"
-                  alt="Children in a classroom"
-                  className="w-full rounded-xl shadow-2xl object-cover transform hover:scale-105 transition-transform duration-500"
+                  src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg"
+                  alt="Cameroon classroom with children learning"
+                  className="w-full max-w-full rounded-xl border border-yellow-400 object-cover shadow-md hover:scale-102 transition-all"
                   loading="lazy"
+                  onError={(e) => (e.currentTarget.src = 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg')}
                 />
               </motion.div>
             </div>
-          </div>
-          <hr className="mt-16 border-t-2 border-gradient-to-r from-green-500 to-blue-600" />
-        </motion.section>
 
-        {/* Rwanda Section */}
-        <motion.section
-          id="rwanda"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="py-20 bg-gray-100"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Rwanda Subsection */}
             <div className="flex flex-col lg:flex-row-reverse gap-12 items-center">
               <motion.div
-                initial={{ opacity: 0, x: 30 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8 }}
+                variants={fadeInUp}
+                initial="hidden"
+                whileInView="visible"
+                transition={{ delay: 0.2 }}
                 className="lg:w-1/2"
               >
                 <div className="flex items-center mb-6">
-                  <MapPin className="h-12 w-12 text-green-600 mr-4 transform hover:scale-110 transition-transform" />
-                  <h2 className="text-3xl sm:text-4xl font-bold font-poppins text-gray-800">
-                    Rwanda: A New Chapter
-                  </h2>
+                  <MapPin className="h-10 w-10 text-red-500 mr-4 hover:animate-spin" />
+                  <h3 className="text-2xl sm:text-3xl font-bold font-poppins text-navy-800">
+                    A New Chapter in Rwanda
+                  </h3>
                 </div>
-                <p className="text-gray-600 font-poppins text-lg leading-loose mb-6">
-                  In Rwanda, 38% of the population lives below the poverty line, and literacy rates in areas like Musanze (63%) trail the national average. Bindi’s initiative is collecting and redistributing 1000 books to underserved schools, empowering over 500 children with the tools to thrive.
+                <p className="text-gray-600 font-poppins text-lg leading-relaxed mb-6 max-w-prose">
+                  In Rwanda, where 38% live below the poverty line and literacy rates lag in areas like Musanze (63%), Bindi is distributing 1000 books to underserved schools, reaching over 500 children.
                 </p>
-                <div className="flex gap-4">
+                <div className="flex flex-row gap-4 flex-wrap">
                   <Button
                     href="/impact"
-                    variant="gradient"
-                    size="md"
+                    variant="red"
+                    size="sm"
                     ariaLabel="See Bindi’s impact in Rwanda"
-                    className="transform hover:scale-105 transition-all"
+                    className="hover:scale-105 min-w-[120px] max-w-[180px]"
                   >
                     Our Impact
-                    <ArrowRight className="ml-2 h-5 w-5" />
+                    <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
-                  <Button
-                    href="#vision"
-                    variant="outline"
-                    size="md"
-                    ariaLabel="Learn about Bindi’s vision"
-                    className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+                  <a
+                    href="/stories"
+                    className="text-navy-800 font-poppins text-lg underline hover:text-yellow-400 transition-colors"
+                    aria-label="Learn more about Bindi’s work in Rwanda"
                   >
-                    Our Vision
-                    <ArrowRight className="ml-2 h-5 w-5" />
-                  </Button>
+                    Learn More
+                  </a>
                 </div>
               </motion.div>
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.8 }}
+                variants={scaleIn}
+                initial="hidden"
+                whileInView="visible"
                 className="lg:w-1/2"
               >
                 <img
-                  src="/images/map-rwanda.png"
-                  alt="Map highlighting Musanze and Kibeho"
-                  className="w-full rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                  src="https://images.pexels.com/photos/614494/pexels-photo-614494.jpeg"
+                  alt="Rwandan landscape with community"
+                  className="w-full max-w-full rounded-xl border border-yellow-400 object-cover shadow-md hover:scale-102 transition-all"
                   loading="lazy"
+                  onError={(e) => (e.currentTarget.src = 'https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg')}
                 />
               </motion.div>
             </div>
           </div>
-          <hr className="mt-16 border-t-2 border-gradient-to-r from-green-500 to-blue-600" />
         </motion.section>
 
-        {/* Vision Section */}
+        {/* Get Involved Section */}
         <motion.section
-          id="vision"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="py-20 bg-white"
+          id="get-involved"
+          initial="hidden"
+          whileInView="visible"
+          variants={fadeInUp}
+          className="py-24 bg-red-500 text-white text-center"
+          aria-describedby="get-involved-description"
         >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div className="flex items-center justify-center mb-6">
-              <Globe className="h-12 w-12 text-green-600 mr-4 transform hover:scale-110 transition-transform" />
-              <h2 className="text-3xl sm:text-4xl font-bold font-poppins text-gray-800">
-                Our Vision
-              </h2>
-            </div>
-            <p className="text-gray-600 font-poppins text-lg leading-loose max-w-4xl mx-auto mb-10">
-              We envision a Rwanda where every child can read, imagine, and grow. By supporting universal literacy by 2030, Bindi aligns with Sustainable Development Goal 4 (Quality Education), fostering a brighter future for communities in Musanze, Kibeho, and beyond.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <div className="container mx-auto px-6 sm:px-8 lg:px-12 max-w-7xl">
+            <motion.h2
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              className="text-3xl sm:text-4xl font-extrabold font-poppins mb-6"
+            >
+              Join the Literacy Movement
+            </motion.h2>
+            <motion.p
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ delay: 0.2 }}
+              className="text-lg font-poppins text-gray-100 max-w-2xl mx-auto mb-8"
+              id="get-involved-description"
+            >
+              Your support can change lives. Donate books, volunteer, or share our mission today.
+            </motion.p>
+            <motion.div
+              variants={fadeInUp}
+              initial="hidden"
+              whileInView="visible"
+              transition={{ delay: 0.4 }}
+              className="flex flex-row justify-center gap-4 flex-wrap"
+            >
               <Button
                 href="/donate"
-                variant="gradient"
-                size="lg"
-                ariaLabel="Join Bindi’s mission by donating"
-                className="transform hover:scale-105 transition-all shadow-lg"
-              >
-                Join Our Mission
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button
-                href="/contact"
-                variant="outline"
-                size="lg"
-                ariaLabel="Contact Bindi for more information"
-                className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white transform hover:scale-105 transition-all shadow-lg"
-              >
-                Get in Touch
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-        </motion.section>
-
-        {/* CTA Section */}
-        <motion.section
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="py-20 bg-gradient-to-r from-green-600 to-blue-700 text-white text-center"
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl sm:text-4xl font-bold font-poppins mb-6">
-              Be Part of the Literacy Movement
-            </h2>
-            <p className="text-lg font-poppins text-gray-200 max-w-2xl mx-auto mb-10">
-              Your support can transform lives. Donate books, volunteer, or share our mission today.
-            </p>
-            <div className="flex flex-col sm:flex-row justify-center gap-4">
-              <Button
-                href="/donate"
-                variant="primary"
-                size="lg"
+                variant="yellow"
+                size="md"
                 ariaLabel="Donate books to Bindi"
-                className="bg-white text-green-700 hover:bg-gray-100 transform hover:scale-105 transition-all"
+                className="hover:scale-105 min-w-[140px] max-w-[200px]"
               >
                 Donate Now
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
               <Button
                 href="/volunteer"
-                variant="outline"
-                size="lg"
+                variant="white"
+                size="md"
                 ariaLabel="Volunteer with Bindi"
-                className="border-white text-white hover:bg-white hover:text-green-700 transform hover:scale-105 transition-all"
+                className="hover:scale-105 min-w-[140px] max-w-[200px]"
               >
                 Volunteer
-                <ArrowRight className="ml-2 h-5 w-5" />
+                <ArrowRight className="ml-1 h-4 w-4" />
               </Button>
-              <Button
+              <a
                 href="/stories"
-                variant="primary"
-                size="lg"
-                ariaLabel="Explore Bindi’s stories"
-                className="bg-white text-blue-700 hover:bg-gray-100 transform hover:scale-105 transition-all"
+                className="text-white font-poppins text-lg underline hover:text-yellow-400 transition-colors"
+                aria-label="Explore Bindi’s stories"
               >
-                Our Stories
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-            </div>
+                Learn More
+              </a>
+            </motion.div>
           </div>
         </motion.section>
       </main>

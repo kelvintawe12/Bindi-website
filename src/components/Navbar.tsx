@@ -18,8 +18,17 @@ export function Navbar() {
           <Link to="/" className="font-medium hover:text-yellow-500 transition-colors">
             Home
           </Link>
+          <Link to="/Binidi-Initiative" className="hover:text-yellow-500">
+            Bindi
+          </Link>
           <Link to="/about" className="font-medium hover:text-yellow-500 transition-colors">
             About
+          </Link>
+          <Link to="/blog" className="font-medium hover:text-yellow-500 transition-colors">
+            Blog
+          </Link>
+          <Link to="/contact" className="font-medium hover:text-yellow-500 transition-colors">
+            Contact
           </Link>
           <Link to="/donate" className="font-medium hover:text-yellow-500 transition-colors">
             Donate
@@ -29,12 +38,6 @@ export function Navbar() {
           </Link>
           <Link to="/impact" className="font-medium hover:text-yellow-500 transition-colors">
             Impact
-          </Link>
-          <Link to="/blog" className="font-medium hover:text-yellow-500 transition-colors">
-            Blog
-          </Link>
-          <Link to="/contact" className="font-medium hover:text-yellow-500 transition-colors">
-            Contact
           </Link>
           <Link to="/stories" className="font-medium hover:text-yellow-500 transition-colors">
             Stories
@@ -47,6 +50,9 @@ export function Navbar() {
           </Link>
           <Link to="/resources" className="font-medium hover:text-yellow-500 transition-colors">
             Resources
+          </Link>
+          <Link to="/home" className="font-medium hover:text-yellow-500 transition-colors">
+            Home
           </Link>
         </nav>
         <div className="hidden md:block">
@@ -64,23 +70,14 @@ export function Navbar() {
             <Link to="/" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Home
             </Link>
+            <Link to="/Binidi-Initiative" className="font-medium hover:text-yellow-500 transition-colors py-2">
+              Bindi
+            </Link>
             <Link to="/about" className="font-medium hover:text-yellow-500 transition-colors py-2">
               About
             </Link>
-            <Link to="/services" className="font-medium hover:text-yellow-500 transition-colors py-2">
-              Services
-            </Link>
-            <Link to="/process" className="font-medium hover:text-yellow-500 transition-colors py-2">
-              Our Process
-            </Link>
-            <Link to="/portfolio" className="font-medium hover:text-yellow-500 transition-colors py-2">
-              Portfolio
-            </Link>
             <Link to="/contact" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Contact
-            </Link>
-            <Link to="/bindi-initiative" className="font-medium hover:text-yellow-500 transition-colors py-2">
-              Bindi Initiative
             </Link>
             <Button variant="primary" className="w-full text-left">
               Donate
