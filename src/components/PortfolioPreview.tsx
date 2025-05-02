@@ -1,30 +1,35 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export function PortfolioPreview() {
   const portfolioItems = [
     {
-      title: 'Bindi Rural Reading Campaign',
-      category: 'Reading Access',
-      image: 'https://images.pexels.com/photos/159538/pexels-photo-159538.jpeg', // Children reading in a classroom
-      description: `Bindi’s Rural Reading Campaign distributes 1000 gently used books to 50 rural schools in Rwanda, partnering with local NGOs and ALU students. This initiative has reached 8,000 students, fostering literacy and creating vibrant reading communities in underserved areas.`,
+      title: 'Bindi Book Drive: 1000 Books for Rwanda',
+      category: 'Literacy Programs',
+      image: '/bindi.jpg', // Children reading in a classroom
+      description: `The Bindi Book Drive aims to collect and distribute 1000 gently used books to 50 underprivileged schools across Rwanda. Partnering with local NGOs and ALU students, this initiative has already reached 5,000 students, fostering a love for reading and improving literacy rates in rural communities.`,
+      route: '/blog',
     },
     {
-      title: 'Bindi Educator Empowerment Program',
-      category: 'Teacher Training',
-      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg', // Team collaboration, representing training
-      description: `Bindi’s Educator Empowerment Program trains teachers in modern literacy techniques across Kibeho and Musanze. With 300 educators trained, this program supports 15,000 students by equipping classrooms with engaging reading resources and methods.`,
+      title: 'Bindi Teacher Training Workshops',
+      category: 'Educational Resources',
+      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg', // Team collaborating, representing training
+      description: `Bindi’s Teacher Training Workshops empower educators with innovative literacy teaching methods. Conducted in Kibeho and Musanze, these workshops have trained 200 teachers, equipping them with tools to create engaging reading environments and support 10,000 students.`,
+      route: '/blog',
     },
     {
-      title: 'Bindi Village Library Project',
-      category: 'Library Development',
+      title: 'Bindi Community Libraries',
+      category: 'Community Engagement',
       image: 'https://images.pexels.com/photos/927451/pexels-photo-927451.jpeg', // Community setting, representing libraries
-      description: `Bindi’s Village Library Project establishes accessible libraries in rural Rwanda, serving 5,000 families. Launched in 2025, five new libraries provide free books, promoting lifelong learning and reducing educational disparities.`,
+      description: `Bindi establishes community libraries in rural Rwanda to provide free access to books. With three libraries opened in 2025, this project serves 3,000 families, promoting lifelong learning and reducing educational inequalities in underserved areas.`,
+      route: '/blog',
     },
     {
-      title: 'Bindi Youth Literacy Ambassadors',
-      category: 'Youth Programs',
-      image: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg', // Students engaging, representing youth programs
-      description: `Bindi’s Youth Literacy Ambassadors, led by ALU volunteers, inspire 6,000 students through reading clubs in 30 schools. This program encourages storytelling and peer learning, building literacy skills and confidence among Rwanda’s youth.`,
+      title: 'Bindi Student Reading Clubs',
+      category: 'Volunteer Initiatives',
+      image: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg', // Students engaging, representing reading clubs
+      description: `Bindi’s Student Reading Clubs, led by ALU student volunteers, encourage peer-to-peer learning through interactive storytelling and reading activities. Operating in 20 schools, these clubs have engaged 4,000 students, building confidence and literacy skills.`,
+      route: '/blog',
     },
   ];
 
@@ -33,11 +38,11 @@ export function PortfolioPreview() {
       <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 font-poppins">
-            Bindi’s Literacy Mission
+            Bindi’s Literacy Impact
           </h2>
           <div className="w-20 h-1 bg-yellow-500 mx-auto mb-6"></div>
           <p className="max-w-2xl mx-auto text-gray-700 font-poppins">
-            Explore Bindi’s initiatives that transform lives through literacy, bringing books and education to Rwanda’s children and communities.
+            Explore Bindi’s transformative projects that empower Rwanda’s children and communities through literacy and education.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -67,8 +72,8 @@ export function PortfolioPreview() {
                       {item.description}
                     </p>
                   )}
-                  <a
-                    href=""
+                  <Link
+                    to={item.route}
                     className="inline-flex items-center text-white hover:text-yellow-500 transition-colors font-poppins"
                     aria-label={`View case study for ${item.title}`}
                   >
@@ -85,15 +90,15 @@ export function PortfolioPreview() {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
           ))}
         </div>
         <div className="text-center mt-12">
-          <a
-            href="/portfolio"
+          <Link
+            to="/bindi"
             className="inline-flex items-center text-blue-900 hover:text-yellow-500 font-medium transition-colors font-poppins"
             aria-label="View all Bindi projects"
           >
@@ -110,7 +115,7 @@ export function PortfolioPreview() {
                 clipRule="evenodd"
               />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

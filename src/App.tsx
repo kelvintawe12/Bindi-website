@@ -26,7 +26,7 @@ export function App() {
         <Chatbot />
         <Routes>
           <Route path="/" element={<AppRoutes />} />
-          <Route path="/Binidi-Initiative" element={<BindiInitiative />} />
+          <Route path="/bindi" element={<BindiInitiative />} />
           <Route path="/about" element={<Layout><About /></Layout>} />
           <Route path="/blog" element={<Layout><Blog /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
