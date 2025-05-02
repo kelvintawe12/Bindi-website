@@ -14,22 +14,24 @@ import Partners from './pages/Partners';
 import Resources from './pages/Resources';
 import Home from './pages/Home';
 
+import { Layout } from './components/Layout';
+
 export function App() {
   return (
     <Routes>
       <Route path="/" element={<AppRoutes />} />
       <Route path="/Binidi-Initiative" element={<BindiInitiative />} />
-      <Route path="/about" element={<About />} />
-      <Route path="/blog" element={<Blog />} />
-      <Route path="/contact" element={<Contact />} />
-      <Route path="/donate" element={<Donate />} />
-      <Route path="/volunteer" element={<Volunteer />} />
-      <Route path="/impact" element={<Impact />} />
-      <Route path="/stories" element={<Stories />} />
-      <Route path="/events" element={<Events />} />
-      <Route path="/partners" element={<Partners />} />
-      <Route path="/resources" element={<Resources />} />
-      <Route path="/home" element={<Home />} />
+      <Route path="/about" element={<Layout><About /></Layout>} />
+      <Route path="/blog" element={<Layout><Blog /></Layout>} />
+      <Route path="/contact" element={<Layout><Contact /></Layout>} />
+      <Route path="/donate" element={<Layout><Donate /></Layout>} />
+      <Route path="/volunteer" element={<Layout><Volunteer /></Layout>} />
+      <Route path="/impact" element={<Layout><Impact /></Layout>} />
+      <Route path="/stories" element={<Layout><Stories /></Layout>} />
+      <Route path="/events" element={<Layout><Events /></Layout>} />
+      <Route path="/partners" element={<Layout><Partners /></Layout>} />
+      <Route path="/resources" element={<Layout><Resources /></Layout>} />
+      <Route path="/home" element={<Layout><Home /></Layout>} />
     </Routes>
   );
 }
