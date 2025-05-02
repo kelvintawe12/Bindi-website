@@ -15,13 +15,11 @@ import Resources from './pages/Resources';
 import Home from './pages/Home';
 
 import { Layout } from './components/Layout';
-import { AppProvider } from './context/AppContext';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Chatbot } from './components/common/Chatbot';
 
 export function App() {
   return (
-    <AppProvider>
       <ErrorBoundary>
         <Chatbot />
         <Routes>
@@ -40,7 +38,6 @@ export function App() {
           <Route path="/home" element={<Layout><Home /></Layout>} />
         </Routes>
       </ErrorBoundary>
-    </AppProvider>
   );
 }
 
