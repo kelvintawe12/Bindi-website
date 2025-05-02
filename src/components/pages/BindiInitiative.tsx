@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Navbar } from '../Navbar';
+import { PageFooter } from '../../pages/FooterPage';
 import { Link } from 'react-router-dom';
 import { ChevronDown, ChevronUp } from 'lucide-react';
 
@@ -29,13 +31,21 @@ export function BindiInitiative() {
   };
 
   return (
+
     <div className="bg-white min-h-screen">
-      {/* Hero Section */}
+      <Navbar />
+      {/* Header */}
+      <header className="bg-blue-900 text-white py-4 shadow-md">
+        <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl">
+          <h1 className="text-3xl font-bold font-poppins">Bindi Initiative</h1>
+        </div>
+      </header>
+      {/* Hero Section */} 
       <section className="relative bg-gradient-to-r from-blue-900 to-teal-700 text-white py-24">
         <div className="absolute inset-0">
           <img
-            src="https://images.pexels.com/photos/159538/pexels-photo-159538.jpeg"
-            alt="Children reading in a classroom in Rwanda"
+            src="https://images.pexels.com/photos/3184288/pexels-photo-3184288.jpeg"
+            alt="Children reading books together"
             className="w-full h-full object-cover opacity-30"
             loading="lazy"
           />
@@ -371,6 +381,7 @@ export function BindiInitiative() {
             </div>
           </motion.section>
         </div>
+        <PageFooter />
       </div>
     </div>
   );
