@@ -10,6 +10,7 @@ const categoryIcons = {
   Guides: FileText,
   Activities: Activity,
   Templates: Layout,
+  Tips: FileText, // Added Tips category icon, reusing FileText icon
 };
 
 // Animation variants

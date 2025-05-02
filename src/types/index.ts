@@ -71,10 +71,11 @@ export interface Partner {
 }
 
 export interface Resource {
+  id: string;
   title: string;
   description: string;
   link: string;
-  category: 'Worksheets' | 'Guides' | 'Activities' | 'Templates';
+  category: 'Worksheets' | 'Guides' | 'Activities' | 'Templates' | 'Tips';
   image: string;
   type: 'PDF' | 'Video' | 'Guide' | 'Worksheet';
 }
