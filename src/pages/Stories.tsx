@@ -15,26 +15,26 @@ const Stories: React.FC = () => {
     community: 'Kibeho' | 'Musanze';
   };
 
-  const stories: StoryType[] = [
+const stories: StoryType[] = [
     {
-      id: '1',
-      title: 'Kibeho’s New Library',
-      content: 'A teacher shares how Bindi’s books transformed her classroom into a vibrant learning space.',
-      image: '/images/classroom.jpg',
-      quote: 'These books brought joy to my students.',
-      type: 'Beneficiary',
-      community: 'Kibeho',
+        id: '1',
+        title: 'Kibeho’s New Library',
+        content: 'A teacher shares how Bindi’s books transformed her classroom into a vibrant learning space.',
+        image: 'https://images.pexels.com/photos/590493/pexels-photo-590493.jpeg',
+        quote: 'These books brought joy to my students.',
+        type: 'Beneficiary',
+        community: 'Kibeho',
     },
     {
-      id: '2',
-      title: 'A Donor’s Journey',
-      content: 'An ALU student reflects on donating books and joining the literacy movement.',
-      image: '/images/volunteers.jpg',
-      quote: 'Donating books felt like giving hope.',
-      type: 'Donor',
-      community: 'Musanze',
+        id: '2',
+        title: 'A Donor’s Journey',
+        content: 'An ALU student reflects on donating books and joining the literacy movement.',
+        image: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
+        quote: 'Donating books felt like giving hope.',
+        type: 'Donor',
+        community: 'Musanze',
     },
-  ];
+];
 
   const [filter, setFilter] = useState<'All' | 'Beneficiary' | 'Donor' | 'Musanze' | 'Kibeho'>('All');
   const filteredStories = filter === 'All'
