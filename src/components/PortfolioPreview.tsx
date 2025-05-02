@@ -48,6 +48,7 @@ export function PortfolioPreview() {
                 <img
                   src={item.image}
                   alt={item.title}
+                  loading="lazy"
                   className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-300"
                 />
               </div>

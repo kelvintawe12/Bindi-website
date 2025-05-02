@@ -71,9 +71,16 @@ export interface Partner {
 }
 
 export interface Resource {
-  id: string;
   title: string;
   description: string;
-  category: 'Guides' | 'Activities' | 'Tips';
   link: string;
+  category: 'Worksheets' | 'Guides' | 'Activities' | 'Templates';
+  image: string;
+  type: 'PDF' | 'Video' | 'Guide' | 'Worksheet';
 }
+
+
+
+
+
+

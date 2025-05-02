@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { motion } from 'framer-motion';
+import CountUp from 'react-countup';
 import { Button } from './common/Button';
-import { Loader2, ArrowRight } from 'lucide-react';
+import { Loader2, Send, ArrowRight } from 'lucide-react';
 
 // Enhanced schema with stricter validation
 const volunteerSchema = z.object({
@@ -16,6 +17,9 @@ const volunteerSchema = z.object({
 });
 
 type VolunteerFormData = z.infer<typeof volunteerSchema>;
+
+// Mock progress data
+const progress = { booksCollected: 750, goal: 1000 };
 
 export const VolunteerForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -64,7 +68,10 @@ export const VolunteerForm: React.FC = () => {
     []
   );
 
-  // Animation for success message
+  // Respect prefers-reduced-motion
+  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Animation for success message and donation CTA
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
@@ -77,7 +84,7 @@ export const VolunteerForm: React.FC = () => {
           initial="hidden"
           animate="visible"
           variants={fadeIn}
-          className="bg-white rounded-lg shadow-md p-6 text-center"
+          className="bg-white rounded-lg shadow-md p-8 text-center"
           role="alert"
           aria-live="polite"
         >
@@ -100,16 +107,16 @@ export const VolunteerForm: React.FC = () => {
         </motion.div>
       ) : (
         <>
-          <p className="text-lg font-poppins text-gray-600 mb-6 leading-relaxed" id="form-preamble">
-            Join our volunteer team to help bring literacy to Rwanda’s children. Please fill out the form below, and we’ll
-            contact you with details about your preferred role.
+          <p className="text-lg font-poppins text-gray-600 mb-8 leading-relaxed" id="form-preamble">
+            Help us reach our goal of collecting 1000 books for Rwanda’s children. Volunteer to sort books, lead workshops,
+            or engage communities, or donate books to make a direct impact.
           </p>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="bg-white rounded-lg shadow-md p-6"
+            className="bg-white rounded-lg shadow-md p-8"
             aria-describedby="form-preamble"
           >
-            <div className="mb-6">
+            <div className="mb-8">
               <label htmlFor="name" className="block text-gray-800 font-poppins text-lg font-semibold mb-2">
                 Name
               </label>
@@ -130,7 +137,7 @@ export const VolunteerForm: React.FC = () => {
                 </p>
               )}
             </div>
-            <div className="mb-6">
+            <div className="mb-8">
               <label htmlFor="email" className="block text-gray-800 font-poppins text-lg font-semibold mb-2">
                 Email
               </label>
@@ -151,7 +158,7 @@ export const VolunteerForm: React.FC = () => {
                 </p>
               )}
             </div>
-            <div className="mb-6">
+            <div className="mb-8">
               <label className="block text-gray-800 font-poppins text-lg font-semibold mb-2">Availability</label>
               <div className="flex flex-col sm:flex-row gap-4">
                 <label className="flex items-center">
@@ -159,7 +166,7 @@ export const VolunteerForm: React.FC = () => {
                     {...register('availability')}
                     type="checkbox"
                     value="Weekdays"
-                    className="mr-2 h-4 w-4 text-green-600 focus:ring-green-600 border-gray-200 rounded"
+                    className="mr-2 h-5 w-5 text-green-600 focus:ring-green-600 border-gray-200 rounded"
                     aria-describedby={errors.availability ? 'availability-error' : undefined}
                   />
                   <span className="text-gray-600 font-poppins text-base">Weekdays</span>
@@ -169,7 +176,7 @@ export const VolunteerForm: React.FC = () => {
                     {...register('availability')}
                     type="checkbox"
                     value="Weekends"
-                    className="mr-2 h-4 w-4 text-green-600 focus:ring-green-600 border-gray-200 rounded"
+                    className="mr-2 h-5 w-5 text-green-600 focus:ring-green-600 border-gray-200 rounded"
                     aria-describedby={errors.availability ? 'availability-error' : undefined}
                   />
                   <span className="text-gray-600 font-poppins text-base">Weekends</span>
@@ -181,7 +188,7 @@ export const VolunteerForm: React.FC = () => {
                 </p>
               )}
             </div>
-            <div className="mb-6">
+            <div className="mb-8">
               <label htmlFor="role" className="block text-gray-800 font-poppins text-lg font-semibold mb-2">
                 Preferred Role
               </label>
@@ -207,7 +214,7 @@ export const VolunteerForm: React.FC = () => {
                 </p>
               )}
             </div>
-            <div className="mb-6">
+            <div className="mb-8">
               <label htmlFor="comments" className="block text-gray-800 font-poppins text-lg font-semibold mb-2">
                 Comments (Optional)
               </label>
@@ -225,38 +232,79 @@ export const VolunteerForm: React.FC = () => {
                 </p>
               )}
             </div>
-            <div className="flex flex-row justify-center gap-4 flex-wrap">
-              <Button
-                type="submit"
-                variant="primary"
-                size="lg"
-                className={`cursor-pointer min-w-[140px] max-w-[200px] flex items-center justify-center ${
-                  isSubmitting ? 'opacity-50 pointer-events-none' : ''
-                }`}
-                ariaLabel="Submit volunteer form"
-                className="cursor-pointer min-w-[140px] max-w-[200px] flex items-center justify-center"
-              >
-                {isSubmitting ? (
-                  <>
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Submitting...
-                  </>
-                ) : (
-                  'Sign Up'
-                )}
-              </Button>
-              <Button
-                type="button"
-                variant="outline"
-                size="lg"
-                onClick={handleReset}
-                ariaLabel="Reset volunteer form"
-                className="cursor-pointer min-w-[140px] max-w-[200px]"
-              >
-                Reset
-              </Button>
+            <div className="sticky bottom-0 bg-white pt-4 pb-6 -mx-8 px-8 border-t border-gray-200">
+              <div className="flex flex-row justify-center gap-4 flex-wrap">
+                <Button
+                  type="submit"
+                  variant="primary"
+                  size="md"
+                  disabled={isSubmitting}
+                  ariaLabel="Submit volunteer form"
+                  className="cursor-pointer min-w-[160px] max-w-[220px] flex items-center justify-center py-4 font-bold text-lg"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Submitting...
+                    </>
+                  ) : (
+                    <>
+                      Sign Up
+                      <Send className="ml-2 h-5 w-5" />
+                    </>
+                  )}
+                </Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="md"
+                  onClick={handleReset}
+                  ariaLabel="Reset volunteer form"
+                  className="cursor-pointer min-w-[160px] max-w-[220px] py-4 font-bold text-lg"
+                >
+                  Reset
+                </Button>
+              </div>
             </div>
           </form>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            className="mt-8 bg-white rounded-lg shadow-md p-8 text-center"
+            role="region"
+            aria-label="Donation call-to-action"
+            aria-describedby="donation-description"
+          >
+            <h3 className="text-2xl font-extrabold font-poppins text-gray-800 mb-4">
+              Not Ready to Volunteer?
+            </h3>
+            <p className="text-lg font-poppins text-gray-600 mb-6 leading-relaxed" id="donation-description">
+              Support our goal of collecting 1000 books by donating books to Rwanda’s children. Every book counts!
+            </p>
+            <div className="text-lg font-poppins text-gray-800 mb-6">
+              {reduceMotion ? (
+                <span>{progress.booksCollected}/{progress.goal} Books Collected</span>
+              ) : (
+                <CountUp
+                  start={0}
+                  end={progress.booksCollected}
+                  duration={2.5}
+                  suffix={`/${progress.goal} Books Collected`}
+                />
+              )}
+            </div>
+            <Button
+              href="/donate"
+              variant="primary"
+              size="lg"
+              ariaLabel="Donate books to Bindi"
+              className="cursor-pointer min-w-[140px] max-w-[200px]"
+            >
+              Donate Books
+              <ArrowRight className="ml-1 h-4 w-4" />
+            </Button>
+          </motion.div>
         </>
       )}
     </div>

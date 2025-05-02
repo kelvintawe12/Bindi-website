@@ -36,19 +36,27 @@ const Hero: React.FC = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Slideshow Background */}
-      {backgroundImages.map((image, index) => (
-        <div
-          key={image}
-          className={`absolute inset-0 bg-cover bg-center transition-opacity duration-1000 ease-in-out ${
-            index === currentImageIndex ? 'opacity-100' : 'opacity-0'
-          }`}
-          style={{
-            backgroundImage: `linear-gradient(to bottom, rgba(30, 58, 138, 0.7), rgba(30, 58, 138, 0.9)), url('${image}')`,
-          }}
-          aria-hidden={index !== currentImageIndex}
-        />
-      ))}
+      {/* Slideshow Images */}
+      <div className="absolute inset-0 overflow-hidden">
+        {backgroundImages.map((image, index) => {
+          const nextImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+          if (index === currentImageIndex || index === nextImageIndex) {
+            return (
+              <img
+                key={image}
+                src={image}
+                alt={`Slideshow image ${index + 1}`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                  index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+                }`}
+                loading="lazy"
+                aria-hidden={index !== currentImageIndex}
+              />
+            );
+          }
+          return null;
+        })}
+      </div>
       {/* Content */}
       <div className="container mx-auto px-4 py-20 md:py-32 flex flex-col items-center text-center relative z-10">
         <h1
