@@ -56,7 +56,12 @@ export function Navbar() {
           </Link>
         </nav>
         <div className="hidden md:block">
-          <Button variant="primary">Donate</Button>
+            <Link to="/donate">
+            <Button variant="primary" className="px-6 py-2 text-sm font-semibold">
+              Donate
+            </Button>
+            </Link>
+
         </div>
         {/* Mobile Menu Button */}
         <button className="md:hidden text-white" onClick={toggleMenu} aria-label="Toggle menu">
@@ -70,8 +75,8 @@ export function Navbar() {
             <Link to="/" className="font-medium hover:text-yellow-500 transition-colors py-2">
               Home
             </Link>
-            <Link to="/Binidi-Initiative" className="font-medium hover:text-yellow-500 transition-colors py-2">
-              Bindi
+            <Link to="/blog" className="font-medium hover:text-yellow-500 transition-colors py-2">
+              Blog
             </Link>
             <Link to="/about" className="font-medium hover:text-yellow-500 transition-colors py-2">
               About
