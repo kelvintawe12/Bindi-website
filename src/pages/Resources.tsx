@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import { motion, useInView } from 'framer-motion';
 import CountUp from 'react-countup';
-import { ResourceCard } from '../components/ResourceCard';
+import  ResourceCard  from '../components/ResourceCard';
 import { Button } from '../components/common/Button';
 import { Search, ArrowRight } from 'lucide-react';
 import Head from 'next/head';
@@ -130,49 +130,56 @@ const Resources: React.FC = () => {
       </Head>
       <main className="bg-gray-50 py-24">
         <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl">
-          {/* Header */}
+          {/* Hero Section with Pexels Background */}
           <motion.section
             initial="hidden"
             animate="visible"
             variants={fadeInUp}
-            className="text-center mb-16"
+            className="relative text-center mb-16 py-24 bg-cover bg-center rounded-lg"
+            style={{
+              backgroundImage: `url('https://images.pexels.com/photos/3184323/pexels-photo-3184323.jpeg')`,
+            }}
             role="region"
-            aria-label="Resources header"
-            aria-describedby="header-description"
+            aria-label="Resources hero section"
+            aria-describedby="hero-description"
           >
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl md:text-5xl font-extrabold font-poppins text-gray-800 mb-6"
-            >
-              Tools for Literacy
-            </motion.h1>
-            <motion.p
-              variants={fadeInUp}
-              transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl font-poppins text-gray-600 max-w-3xl mx-auto leading-relaxed"
-              id="header-description"
-            >
-              Discover resources to empower Rwanda’s children through literacy, supporting our goal of collecting 1000 books.
-            </motion.p>
-            <motion.div
-              variants={fadeInUp}
-              transition={{ delay: 0.4 }}
-              className="mt-6"
-            >
-              {reduceMotion ? (
-                <span className="text-xl font-poppins text-gray-800">
-                  {progress.booksCollected}/{progress.goal} Books Collected
-                </span>
-              ) : (
-                <CountUp
-                  start={0}
-                  end={progress.booksCollected}
-                  duration={2.5}
-                  suffix={`/${progress.goal} Books Collected`}
-                  className="text-xl font-poppins text-gray-800"
-                />
-              )}
-            </motion.div>
+            {/* Overlay for text readability */}
+            <div className="absolute inset-0 bg-black bg-opacity-50 rounded-lg"></div>
+            <div className="relative z-10">
+              <motion.h1
+                variants={fadeInUp}
+                className="text-4xl md:text-5xl font-extrabold font-poppins text-white mb-6"
+              >
+                Tools for Literacy
+              </motion.h1>
+              <motion.p
+                variants={fadeInUp}
+                transition={{ delay: 0.2 }}
+                className="text-lg md:text-xl font-poppins text-gray-200 max-w-3xl mx-auto leading-relaxed"
+                id="hero-description"
+              >
+                Discover resources to empower Rwanda’s children through literacy, supporting our goal of collecting 1000 books.
+              </motion.p>
+              <motion.div
+                variants={fadeInUp}
+                transition={{ delay: 0.4 }}
+                className="mt-6"
+              >
+                {reduceMotion ? (
+                  <span className="text-xl font-poppins text-white">
+                    {progress.booksCollected}/{progress.goal} Books Collected
+                  </span>
+                ) : (
+                  <CountUp
+                    start={0}
+                    end={progress.booksCollected}
+                    duration={2.5}
+                    suffix={`/${progress.goal} Books Collected`}
+                    className="text-xl font-poppins text-white"
+                  />
+                )}
+              </motion.div>
+            </div>
           </motion.section>
 
           {/* Resources */}
