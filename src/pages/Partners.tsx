@@ -26,22 +26,22 @@ const Partners: React.FC = () => {
   };
 
   // Mock data
-  const partners = [
+const partners = [
     {
-      id: '1',
-      name: 'Save the Children Rwanda',
-      description: 'Focuses on education and child protection, implementing literacy programs.',
-      logo: '/images/save-the-children.png',
-      website: 'https://savethechildren.org',
+        id: '1',
+        name: 'Save the Children Rwanda',
+        description: 'Focuses on education and child protection, implementing literacy programs.',
+        logo: 'https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg',
+        website: 'https://savethechildren.org',
     },
     {
-      id: '2',
-      name: 'Imbuto Foundation',
-      description: 'Supports child development and girls’ education in Rwanda.',
-      logo: '/images/imbuto.png',
-      website: 'https://imbutofoundation.org',
+        id: '2',
+        name: 'Imbuto Foundation',
+        description: 'Supports child development and girls’ education in Rwanda.',
+        logo: 'https://images.pexels.com/photos/3184298/pexels-photo-3184298.jpeg',
+        website: 'https://imbutofoundation.org',
     },
-  ];
+];
 
   return (
     <main className="bg-gray-50 py-16">

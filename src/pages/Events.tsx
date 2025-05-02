@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { EventCard } from '../components/EventCard';
 import { Button } from '../components/common/Button';
@@ -105,6 +105,17 @@ const Events: React.FC = () => {
   // State for modal
   const [selectedEvent, setSelectedEvent] = useState<null | typeof pastEvents[0]>(null);
 
+  // Handle Escape key to close modal
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setSelectedEvent(null);
+      }
+    };
+    window.addEventListener('keydown', handleEscape);
+    return () => window.removeEventListener('keydown', handleEscape);
+  }, []);
+
   return (
     <main className="bg-gradient-to-b from-white to-gray-100 min-h-screen">
       {/* Hero Section */}
@@ -112,18 +123,18 @@ const Events: React.FC = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="relative bg-cover bg-center h-[60vh] flex items-center justify-center"
+        className="relative bg-cover bg-center h-[50vh] sm:h-[60vh] flex items-center justify-center"
         style={{
           backgroundImage:
             "url('https://images.pexels.com/photos/159866/books-book-pages-read-literature-159866.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1')",
         }}
       >
         <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative text-center text-white px-6">
-          <h1 className="text-4xl lg:text-6xl font-extrabold font-sans mb-4">
+        <div className="relative text-center text-white px-4 sm:px-6">
+          <h1 className="text-3xl sm:text-4xl lg:text-6xl font-extrabold font-sans mb-4">
             Empower Literacy Through Our Events
           </h1>
-          <p className="text-xl lg:text-2xl font-sans max-w-3xl mx-auto mb-8">
+          <p className="text-lg sm:text-xl lg:text-2xl font-sans max-w-3xl mx-auto mb-6 sm:mb-8">
             Join book drives and workshops to make a difference in Rwanda.
           </p>
           <Button
@@ -137,18 +148,18 @@ const Events: React.FC = () => {
         </div>
       </motion.section>
 
-      <div className="container mx-auto px-6 lg:px-8 py-20">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20">
         {/* Main Header */}
         <motion.section
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-center mb-20"
+          className="text-center mb-12 sm:mb-20"
         >
-          <h2 className="text-4xl lg:text-5xl font-extrabold font-sans text-gray-900 mb-6 leading-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold font-sans text-gray-900 mb-4 sm:mb-6 leading-tight">
             Join Our Mission
           </h2>
-          <p className="text-xl font-sans text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl font-sans text-gray-600 max-w-3xl mx-auto">
             Participate in our events to support literacy across Rwanda.
           </p>
         </motion.section>
@@ -159,22 +170,22 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-12 sm:mb-20"
         >
-          <h2 className="text-3xl font-bold font-sans text-gray-900 mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold font-sans text-gray-900 mb-6 sm:mb-8 text-center">
             Event Calendar
           </h2>
-          <div className="max-w-lg mx-auto bg-white shadow-lg rounded-lg p-6">
+          <div className="max-w-md mx-auto bg-white shadow-lg rounded-lg p-4 sm:p-6">
             <Calendar
               value={new Date()}
-              className="border-none font-sans"
+              className="border-none font-sans w-full text-sm sm:text-base"
               tileContent={({ date }) => {
                 const event = upcomingEvents.find(
                   event => event.date === date.toISOString().split('T')[0]
                 );
                 return event ? (
                   <div className="relative">
-                    <span className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse"></span>
+                    <span className="absolute -top-1 -right-1 w-2 sm:w-3 h-2 sm:h-3 bg-green-500 rounded-full animate-pulse"></span>
                   </div>
                 ) : null;
               }}
@@ -188,12 +199,12 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-12 sm:mb-20"
         >
-          <h2 className="text-3xl font-bold font-sans text-gray-900 mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold font-sans text-gray-900 mb-6 sm:mb-8">
             Upcoming Events
           </h2>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
             {upcomingEvents.map(event => (
               <motion.div
                 key={event.id}
@@ -202,7 +213,7 @@ const Events: React.FC = () => {
               >
                 <EventCard
                   {...event}
-                  className="bg-white shadow-md hover:shadow-xl transition-shadow rounded-lg p-6"
+                  className="bg-white shadow-md hover:shadow-xl transition-shadow rounded-lg p-4 sm:p-6"
                 />
               </motion.div>
             ))}
@@ -215,12 +226,12 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true }}
-          className="mb-20"
+          className="mb-12 sm:mb-20"
         >
-          <h2 className="text-3xl font-bold font-sans text-gray-900 mb-8 text-center">
+          <h2 className="text-2xl sm:text-3xl font-bold font-sans text-gray-900 mb-6 sm:mb-8 text-center">
             Our Impactful Past Events
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {pastEvents.map(event => (
               <motion.div
                 key={event.id}
@@ -233,16 +244,16 @@ const Events: React.FC = () => {
                 <img
                   src={event.image}
                   alt={event.title}
-                  className="w-full h-48 object-cover"
+                  className="w-full h-40 sm:h-48 object-cover"
                 />
-                <div className="p-6">
-                  <h3 className="text-xl font-bold font-sans text-gray-900 mb-2">
+                <div className="p-4 sm:p-6">
+                  <h3 className="text-lg sm:text-xl font-bold font-sans text-gray-900 mb-2">
                     {event.title}
                   </h3>
-                  <p className="text-sm font-sans text-gray-500 mb-2">
+                  <p className="text-xs sm:text-sm font-sans text-gray-500 mb-2">
                     {event.date} | {event.location}
                   </p>
-                  <p className="text-base font-sans text-gray-600 mb-4">
+                  <p className="text-sm sm:text-base font-sans text-gray-600 mb-4 line-clamp-3">
                     {event.shortDescription}
                   </p>
                   <Button
@@ -265,12 +276,12 @@ const Events: React.FC = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
           viewport={{ once: true }}
-          className="text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-12 rounded-lg shadow-xl"
+          className="text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-10 sm:py-12 rounded-lg shadow-xl"
         >
-          <h3 className="text-2xl font-bold font-sans mb-4">
+          <h3 className="text-xl sm:text-2xl font-bold font-sans mb-4">
             Make a Difference Today
           </h3>
-          <p className="text-lg font-sans mb-6 max-w-xl mx-auto">
+          <p className="text-base sm:text-lg font-sans mb-6 max-w-xl mx-auto">
             Support our events by donating books or volunteering your time.
           </p>
           <Button
@@ -290,7 +301,7 @@ const Events: React.FC = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z  z-50 p-4 sm:p-0 overflow-y-auto"
           onClick={() => setSelectedEvent(null)}
         >
           <motion.div
@@ -298,12 +309,13 @@ const Events: React.FC = () => {
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.8, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="bg-white rounded-lg max-w-2xl w-full mx-4 p-8 relative"
+            className="bg-white rounded-lg w-full max-w-md sm:max-w-lg lg:max-w-2xl mx-4 p-6 sm:p-8 relative overflow-y-auto max-h-[90vh]"
             onClick={e => e.stopPropagation()}
           >
             <button
               onClick={() => setSelectedEvent(null)}
               className="absolute top-4 right-4 text-gray-600 hover:text-gray-900"
+              aria-label="Close modal"
             >
               <svg
                 className="w-6 h-6"
@@ -322,33 +334,33 @@ const Events: React.FC = () => {
             <img
               src={selectedEvent.image}
               alt={selectedEvent.title}
-              className="w-full h-64 object-cover rounded-lg mb-6"
+              className="w-full h-48 sm:h-64 object-cover rounded-lg mb-6"
             />
-            <h3 className="text-2xl font-bold font-sans text-gray-900 mb-4">
+            <h3 className="text-xl sm:text-2xl font-bold font-sans text-gray-900 mb-4">
               {selectedEvent.title}
             </h3>
             <p className="text-sm font-sans text-gray-500 mb-4">
               {selectedEvent.date} | {selectedEvent.location}
             </p>
-            <p className="text-base font-sans text-gray-600 mb-6">
+            <p className="text-sm sm:text-base font-sans text-gray-600 mb-6">
               {selectedEvent.details.description}
             </p>
-            <h4 className="text-lg font-semibold font-sans text-gray-900 mb-2">
+            <h4 className="text-base sm:text-lg font-semibold font-sans text-gray-900 mb-2">
               Impact
             </h4>
             <ul className="list-disc pl-5 mb-6">
               {selectedEvent.details.impact.map((item, index) => (
-                <li key={index} className="text-base font-sans text-gray-600">
+                <li key={index} className="text-sm sm:text-base font-sans text-gray-600">
                   {item}
                 </li>
               ))}
             </ul>
-            <h4 className="text-lg font-semibold font-sans text-gray-900 mb-2">
+            <h4 className="text-base sm:text-lg font-semibold font-sans text-gray-900 mb-2">
               What People Say
             </h4>
-            <blockquote className="border-l-4 border-blue-600 pl-4 italic text-base font-sans text-gray-600 mb-6">
+            <blockquote className="border-l-4 border-blue-600 pl-4 italic text-sm sm:text-base font-sans text-gray-600 mb-6">
               "{selectedEvent.details.testimonial.quote}"
-              <footer className="mt-2 text-sm text-gray-500">
+              <footer className="mt-2 text-xs sm:text-sm text-gray-500">
                 — {selectedEvent.details.testimonial.author}
               </footer>
             </blockquote>
@@ -357,7 +369,7 @@ const Events: React.FC = () => {
                 variant="primary"
                 size="lg"
                 href="/donate"
-                className="bg-blue-600 text-white hover:bg-blue-700"
+                className="bg-blue-600 text-white hover:bg-blue-700 w-full sm:w-auto"
               >
                 Support Future Events
               </Button>
