@@ -32,7 +32,7 @@ export function Navbar() {
           </a>
         </nav>
         <div className="hidden md:block">
-          <Button variant="primary">Get a Quote</Button>
+          <Button variant="primary">Donate</Button>
         </div>
         {/* Mobile Menu Button */}
         <button className="md:hidden text-white" onClick={toggleMenu} aria-label="Toggle menu">
@@ -61,7 +61,7 @@ export function Navbar() {
               Contact
             </a>
             <Button variant="primary" className="w-full text-left">
-              Get a Quote
+              Donate
             </Button>
           </nav>
         </div>}

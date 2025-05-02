@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar } from './components/Navbar';
-import { Hero } from './components/Hero';
+import  Hero  from './components/Hero';
 import { ServicesOverview } from './components/ServicesOverview';
 import { ProcessOverview } from './components/ProcessOverview';
 import { AboutSection } from './components/AboutSection';
