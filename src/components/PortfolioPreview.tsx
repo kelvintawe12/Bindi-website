@@ -3,39 +3,41 @@ import React from 'react';
 export function PortfolioPreview() {
   const portfolioItems = [
     {
-      title: 'BINDI: Expanding Access to Educational Materials in Rwanda',
-      category: 'Social Impact',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80',
-      description: `The Bindi Initiative is a social impact project dedicated to combating literacy challenges in Rwanda by improving access to quality educational materials. The initiative aims to collect and redistribute 1000 gently used books to underprivileged schools and learning centers, promoting literacy and reducing educational inequalities.`,
+      title: 'Bindi Rural Reading Campaign',
+      category: 'Reading Access',
+      image: 'https://images.pexels.com/photos/159538/pexels-photo-159538.jpeg', // Children reading in a classroom
+      description: `Bindi’s Rural Reading Campaign distributes 1000 gently used books to 50 rural schools in Rwanda, partnering with local NGOs and ALU students. This initiative has reached 8,000 students, fostering literacy and creating vibrant reading communities in underserved areas.`,
     },
     {
-      title: 'TechVision Kenya Rebrand',
-      category: 'Branding',
-      image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1415&q=80',
+      title: 'Bindi Educator Empowerment Program',
+      category: 'Teacher Training',
+      image: 'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg', // Team collaboration, representing training
+      description: `Bindi’s Educator Empowerment Program trains teachers in modern literacy techniques across Kibeho and Musanze. With 300 educators trained, this program supports 15,000 students by equipping classrooms with engaging reading resources and methods.`,
     },
     {
-      title: 'Safari Solutions PR Campaign',
-      category: 'Public Relations',
-      image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80',
+      title: 'Bindi Village Library Project',
+      category: 'Library Development',
+      image: 'https://images.pexels.com/photos/927451/pexels-photo-927451.jpeg', // Community setting, representing libraries
+      description: `Bindi’s Village Library Project establishes accessible libraries in rural Rwanda, serving 5,000 families. Launched in 2025, five new libraries provide free books, promoting lifelong learning and reducing educational disparities.`,
     },
     {
-      title: 'EcoSolutions Africa Social Media',
-      category: 'Social Media',
-      image: 'https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80',
+      title: 'Bindi Youth Literacy Ambassadors',
+      category: 'Youth Programs',
+      image: 'https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg', // Students engaging, representing youth programs
+      description: `Bindi’s Youth Literacy Ambassadors, led by ALU volunteers, inspire 6,000 students through reading clubs in 30 schools. This program encourages storytelling and peer learning, building literacy skills and confidence among Rwanda’s youth.`,
     },
   ];
 
   return (
     <section className="py-16 md:py-24 bg-white w-full">
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
-            Featured Projects
+          <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4 font-poppins">
+            Bindi’s Literacy Mission
           </h2>
           <div className="w-20 h-1 bg-yellow-500 mx-auto mb-6"></div>
-          <p className="max-w-2xl mx-auto text-gray-700">
-            Explore some of our recent success stories and see how we've helped
-            businesses and communities achieve their goals.
+          <p className="max-w-2xl mx-auto text-gray-700 font-poppins">
+            Explore Bindi’s initiatives that transform lives through literacy, bringing books and education to Rwanda’s children and communities.
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -54,20 +56,21 @@ export function PortfolioPreview() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-t from-blue-900 via-blue-900/70 to-transparent opacity-0 group-hover:opacity-90 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 p-6">
-                  <span className="text-yellow-500 text-sm font-medium mb-2 block">
+                  <span className="text-yellow-500 text-sm font-medium mb-2 block font-poppins">
                     {item.category}
                   </span>
-                  <h3 className="text-white text-xl font-bold mb-2">
+                  <h3 className="text-white text-xl font-bold mb-2 font-poppins">
                     {item.title}
                   </h3>
                   {item.description && (
-                    <p className="text-white text-sm mb-4">
+                    <p className="text-white text-sm mb-4 font-poppins">
                       {item.description}
                     </p>
                   )}
                   <a
-                    href="#"
-                    className="inline-flex items-center text-white hover:text-coral-500 transition-colors"
+                    href=""
+                    className="inline-flex items-center text-white hover:text-yellow-500 transition-colors font-poppins"
+                    aria-label={`View case study for ${item.title}`}
                   >
                     View Case Study
                     <svg
@@ -91,7 +94,8 @@ export function PortfolioPreview() {
         <div className="text-center mt-12">
           <a
             href="/portfolio"
-            className="inline-flex items-center text-blue-900 hover:text-coral-500 font-medium transition-colors"
+            className="inline-flex items-center text-blue-900 hover:text-yellow-500 font-medium transition-colors font-poppins"
+            aria-label="View all Bindi projects"
           >
             View All Projects
             <svg

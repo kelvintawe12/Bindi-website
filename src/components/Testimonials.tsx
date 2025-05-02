@@ -3,19 +3,19 @@ import React, { useState } from 'react';
 export function Testimonials() {
   const testimonials = [
     {
-      text: 'Royal Communications transformed our marketing strategy completely. Their team took the time to understand our business goals and delivered results that exceeded our expectations.',
-      author: 'Sarah Kamau',
-      position: 'CEO, Nairobi Tech Solutions',
+      text: 'The Bindi Initiative has been a beacon of hope for our community. The books and workshops have inspired our children to dream big and embrace education.',
+      author: 'Alice Uwimana',
+      position: 'Teacher, Musanze District',
     },
     {
-      text: 'Working with Royal Communications has been a game-changer for our brand. Their expertise in digital marketing helped us reach new audiences and significantly increase our online presence.',
-      author: 'Michael Omondi',
-      position: 'Marketing Director, EastAfrica Retailers',
+      text: 'Thanks to Bindi, my students now have access to books they never imagined. This project is truly transforming lives in rural Rwanda.',
+      author: 'Jean Bosco',
+      position: 'Headmaster, Kibeho Sector',
     },
     {
-      text: 'The team at Royal Communications provided exceptional service from day one. Their strategic approach to our PR campaign resulted in increased media coverage and brand recognition.',
-      author: 'Priya Shah',
-      position: 'Founder, Mombasa Startups',
+      text: 'Bindi’s efforts in promoting literacy are commendable. The joy on children’s faces when they receive books is priceless.',
+      author: 'Grace Mukamana',
+      position: 'Community Leader, Musanze',
     },
   ];
 
@@ -34,11 +34,10 @@ export function Testimonials() {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-blue-900 mb-4">
-            What Our Clients Say
+            What People Say About Bindi
           </h2>
           <p className="max-w-2xl mx-auto text-gray-700">
-            Don't just take our word for it. Here's what our clients have to say
-            about working with Royal Communications Ltd.
+            Hear from the people whose lives have been touched by the Bindi Initiative.
           </p>
         </div>
         <div className="max-w-4xl mx-auto relative">
@@ -111,25 +110,16 @@ export function Testimonials() {
         </div>
         <div className="mt-16">
           <h3 className="text-2xl md:text-3xl font-bold text-blue-900 mb-4">
-            Bindi: Expanding Access to Educational Materials in Rwanda
+            About the Bindi Initiative
           </h3>
           <p className="text-gray-700 mb-4">
-            The Bindi Initiative is a social impact project aimed at combating
-            literacy challenges in Rwanda by improving access to quality
-            educational materials for underserved communities. By collecting
-            and redistributing 1,000 gently used books, Bindi seeks to empower
-            young learners and promote a culture of reading.
+            The Bindi Initiative is dedicated to improving literacy in Rwanda by providing access to quality educational materials. Through book drives, community distribution, and literacy workshops, Bindi empowers young learners and fosters a culture of reading.
           </p>
           <p className="text-gray-700 mb-4">
-            Target communities include Musanze District and Kibeho Sector,
-            where literacy rates are below the national average. Through book
-            drives, community distribution, and literacy workshops, Bindi aims
-            to support over 500 children in its first year and contribute to
-            Rwanda's goal of achieving universal literacy by 2030.
+            Our target communities include Musanze District and Kibeho Sector, where literacy rates are below the national average. By redistributing 1,000 gently used books, we aim to support over 500 children in our first year and contribute to Rwanda's goal of achieving universal literacy by 2030.
           </p>
           <p className="text-gray-700">
-            Join us in making a difference by donating books or partnering with
-            us to expand the reach of this impactful initiative.
+            Join us in making a difference by donating books or partnering with us to expand the reach of this impactful initiative.
           </p>
         </div>
       </div>
