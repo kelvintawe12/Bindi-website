@@ -4,7 +4,7 @@ import CountUp from 'react-countup';
 import  ResourceCard  from '../components/ResourceCard';
 import { Button } from '../components/common/Button';
 import { Search, ArrowRight } from 'lucide-react';
-import Head from 'next/head';
+import { Helmet } from 'react-helmet';
 import { Resource } from '../types';
 
 // Mock data aligned with ResourceCard
@@ -121,13 +121,13 @@ const Resources: React.FC = () => {
 
   return (
     <>
-      <Head>
+      <Helmet>
         <title>Bindi Literacy Initiative | Resources</title>
         <meta
           name="description"
           content="Explore educational resources to support literacy and learning for Rwanda’s children."
         />
-      </Head>
+      </Helmet>
       <main className="bg-gray-50 py-24">
         <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl">
           {/* Hero Section with Pexels Background */}

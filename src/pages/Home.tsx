@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import CountUp from 'react-countup';
 import { Button } from '../components/common/Button';
 import { BookOpen, School, Target, ArrowRight, ArrowDown } from 'lucide-react';
-import Head from 'next/head';
+import { Helmet } from 'react-helmet';
 
 // Mock data for progress and stories
 const progress = { booksCollected: 750, goal: 1000, childrenReached: 400, childrenGoal: 500 };
@@ -72,14 +72,14 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Head>
+      <Helmet>
         <title>Bindi Literacy Initiative | Home</title>
         <meta
           name="description"
           content="Join Bindi Literacy Initiative to spark literacy in Rwanda by donating books and volunteering for underserved schools in Musanze and Kibeho."
         />
         <link rel="preload" href={stories[0].image} as="image" />
-      </Head>
+      </Helmet>
       <main className="bg-gray-50">
         {/* Hero Section */}
         <section

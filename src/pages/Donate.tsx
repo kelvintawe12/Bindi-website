@@ -4,7 +4,7 @@ import CountUp from 'react-countup';
 import { DonationForm } from '../components/DonationForm';
 import { Button } from '../components/common/Button';
 import { Calendar, MapPin, Quote, ArrowRight } from 'lucide-react';
-import Head from 'next/head';
+import { Helmet } from 'react-helmet';
 
 // Mock collection schedule
 const schedule = [
@@ -71,14 +71,14 @@ const Donate: React.FC = () => {
 
   return (
     <>
-      <Head>
+      <Helmet>
         <title>Bindi Literacy Initiative | Donate Books</title>
         <meta
           name="description"
           content="Donate gently used books to support literacy for Rwanda’s children and help us reach our 1000-book goal."
         />
         <meta name="keywords" content="donate books, Rwanda literacy, Bindi, children’s education" />
-      </Head>
+      </Helmet>
       <main className="bg-gray-50 py-24">
         <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl">
           {/* Header */}

@@ -4,7 +4,7 @@ import CountUp from 'react-countup';
 import { VolunteerForm } from '../components/VolunteerForm';
 import { Button } from '../components/common/Button';
 import { Users, BookOpen, Package, School, ArrowRight, ArrowDown } from 'lucide-react';
-import Head from 'next/head';
+import { Helmet } from 'react-helmet';
 
 // Mock data for progress and roles
 const progress = { booksCollected: 750, goal: 1000 };
@@ -93,14 +93,14 @@ const Volunteer: React.FC = () => {
 
   return (
     <>
-      <Head>
+      <Helmet>
         <title>Bindi Literacy Initiative | Volunteer</title>
         <meta
           name="description"
           content="Volunteer with Bindi Literacy Initiative to bring books and literacy to children in Rwanda’s underserved schools."
         />
         <link rel="preload" href={heroImage.url} as="image" />
-      </Head>
+      </Helmet>
       <main className="bg-gray-50">
         {/* Hero Section */}
         <section

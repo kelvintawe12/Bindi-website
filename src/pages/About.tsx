@@ -3,7 +3,7 @@ import { motion, useInView } from 'framer-motion';
 import CountUp from 'react-countup';
 import { Button } from '../components/common/Button';
 import { BookOpen, MapPin, ArrowRight, ArrowDown } from 'lucide-react';
-import Head from 'next/head';
+import { Helmet } from 'react-helmet';
 
 // Hero image (Pexels)
 const heroImage = {
@@ -40,11 +40,11 @@ const About: React.FC = () => {
 
   return (
     <>
-      <Head>
+      <Helmet>
         <title>Bindi Literacy Initiative | About</title>
         <meta name="description" content="Discover Bindi’s journey from Cameroon to Rwanda, empowering youth through literacy." />
         <link rel="preload" href={heroImage.url} as="image" />
-      </Head>
+      </Helmet>
       <main className="bg-white">
         {/* Hero Section */}
         <section
