@@ -1,115 +1,377 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 
 export function BindiInitiative() {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  const toggleAccordion = (section: string) => {
+    setActiveSection(activeSection === section ? null : section);
+  };
+
+  const sections = [
+    { id: 'overview', title: 'Initiative Overview' },
+    { id: 'problem', title: 'Problem Statement' },
+    { id: 'goals', title: 'Project Goals' },
+    { id: 'communities', title: 'Target Communities' },
+    { id: 'activities', title: 'Key Activities' },
+    { id: 'partners', title: 'Potential Partners' },
+    { id: 'impact', title: 'Impact Vision' },
+    { id: 'next-steps', title: 'Next Steps' },
+    { id: 'conclusion', title: 'Conclusion' },
+  ];
+
+  // Animation variants for sections
+  const sectionVariants = {
+    hidden: { opacity: 0, y: 50 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
+  };
+
   return (
-    <div className="container mx-auto px-4 py-8 bg-gray-50">
-      <h1 className="text-4xl font-extrabold text-navy-800 mb-8 text-center leading-tight">
-        BINDI: Expanding Access to Educational Materials in Rwanda
-      </h1>
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">1. Initiative Overview</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
-          The Bindi Initiative is a social impact project by Bindi, an educational venture dedicated to creating engaging and culturally relevant activity and coloring books for children. Building on its successful work in Cameroon, Bindi is now expanding into Rwanda with a mission to combat literacy challenges by improving access to quality educational materials for underserved communities.
-        </p>
-        <p className="text-gray-700 leading-relaxed">
-          This initiative aims to collect 1000 gently used books from students, parents, and institutions and redistribute them to underprivileged schools and learning centers across Rwanda. By doing so, Bindi seeks to reduce educational inequalities, encourage reading culture, and empower young learners with the tools they need to thrive.
-        </p>
+    <div className="bg-white min-h-screen">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-r from-blue-900 to-teal-700 text-white py-24">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.pexels.com/photos/159538/pexels-photo-159538.jpeg"
+            alt="Children reading in a classroom in Rwanda"
+            className="w-full h-full object-cover opacity-30"
+            loading="lazy"
+          />
+        </div>
+        <div className="relative container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl text-center">
+          <motion.h1
+            className="text-4xl md:text-6xl font-extrabold font-poppins mb-6 leading-tight"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            BINDI: Empowering Rwanda Through Literacy
+          </motion.h1>
+          <motion.p
+            className="text-lg md:text-xl font-poppins mb-8 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Join us in redistributing 1000 books to underprivileged schools, fostering a love for reading in Rwanda’s children.
+          </motion.p>
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            <Link to="/donate">
+              <button
+                className="px-8 py-3 bg-yellow-500 text-blue-900 font-poppins font-semibold rounded-lg hover:bg-yellow-400 hover:scale-105 transition-all duration-200"
+                aria-label="Donate to support Bindi Initiative"
+              >
+                Donate Now
+              </button>
+            </Link>
+          </motion.div>
+        </div>
       </section>
 
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">2. Problem Statement</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
-          In Rwanda, a significant number of children face challenges in reading and writing, particularly in rural and economically disadvantaged communities. According to UNICEF Rwanda, poverty remains one of the primary barriers to education. Nearly 38% of Rwandans live below the national poverty line, and many families struggle to afford even the most basic educational materials, such as textbooks and storybooks. This economic hardship results in children growing up without access to stimulating and developmentally appropriate learning tools.
-        </p>
-        <p className="text-gray-700 leading-relaxed">
-          While national efforts like the Rwanda Education Sector Strategic Plan (ESSP) have made strides in improving access to education, there remains a gap in the availability of materials that support literacy, especially for early learners. Without proper tools, children are unable to fully develop their literacy skills, leading to poor educational outcomes.
-        </p>
-      </section>
+      {/* Main Content */}
+      <div className="container mx-auto px-4 sm:px-8 lg:px-12 max-w-7xl py-12 flex flex-col lg:flex-row gap-8">
+        {/* Sidebar (Desktop) */}
+        <nav className="hidden lg:block lg:w-1/4 sticky top-24 h-fit">
+          <div className="bg-blue-900/10 p-6 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold font-poppins text-blue-900 mb-4">Explore Bindi</h3>
+            <ul className="space-y-2">
+              {sections.map((section) => (
+                <li key={section.id}>
+                  <a
+                    href={`#${section.id}`}
+                    className="block font-poppins text-gray-700 hover:text-yellow-500 hover:scale-105 transition-all duration-200"
+                    aria-label={`Navigate to ${section.title}`}
+                  >
+                    {section.title}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </nav>
 
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">3. Project Goals</h2>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-          <li>Recycle and redistribute 1000 educational books and materials to under-resourced schools.</li>
-          <li>Promote a culture of reading and literacy in underserved communities.</li>
-          <li>Involve students and institutions in Kigali (starting with ALU) in a meaningful and sustainable community initiative.</li>
-          <li>Expand the impact of Bindi by aligning with the goals of social entrepreneurship and educational equity.</li>
-        </ul>
-      </section>
+        {/* Accordion (Mobile) */}
+        <div className="lg:hidden mb-8">
+          <div className="bg-blue-900/10 p-4 rounded-lg shadow-md">
+            <h3 className="text-xl font-semibold font-poppins text-blue-900 mb-4">Explore Bindi</h3>
+            {sections.map((section) => (
+              <div key={section.id} className="border-b border-gray-200">
+                <button
+                  className="w-full flex justify-between items-center py-3 font-poppins text-gray-700 hover:text-yellow-500"
+                  onClick={() => toggleAccordion(section.id)}
+                  aria-expanded={activeSection === section.id}
+                  aria-controls={`section-${section.id}`}
+                >
+                  {section.title}
+                  {activeSection === section.id ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
+                </button>
+                {activeSection === section.id && (
+                  <div id={`section-${section.id}`} className="pb-3">
+                    <a
+                      href={`#${section.id}`}
+                      className="block font-poppins text-gray-700 hover:text-yellow-500"
+                      onClick={() => toggleAccordion(section.id)}
+                    >
+                      Go to Section
+                    </a>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
 
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">4. Target Communities (Mapping the Need)</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
-          Bindi will begin with two identified communities:
-        </p>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-          <li>
-            <strong>Musanze District (Northern Province)</strong>: According to a 2022 report by the National Institute of Statistics of Rwanda, Musanze District has a literacy rate among children aged 6–15 of approximately 63%, lower than the national average. Rural schools in this district lack sufficient educational materials beyond the core curriculum.
-          </li>
-          <li>
-            <strong>Kibeho Sector, Nyaruguru District (Southern Province)</strong>: According to the Rwanda Poverty Mapping Report, Kibeho is a semi-rural area where the poverty rate exceeds 40%. Many families cannot afford to buy books, and teachers in the region often express the need for more storybooks and creative learning materials to improve literacy rates among young children.
-          </li>
-        </ul>
-      </section>
+        {/* Content Sections */}
+        <div className="lg:w-3/4 space-y-12">
+          <motion.section
+            id="overview"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="md:w-1/2">
+                <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">1. Initiative Overview</h2>
+                <p className="text-gray-700 font-poppins leading-relaxed mb-4">
+                  The Bindi Initiative is a social impact project by Bindi, dedicated to creating engaging and culturally relevant activity and coloring books for children. Now expanding into Rwanda, Bindi combats literacy challenges by improving access to quality educational materials for underserved communities.
+                </p>
+                <p className="text-gray-700 font-poppins leading-relaxed">
+                  We aim to collect 1000 gently used books and redistribute them to underprivileged schools across Rwanda, reducing educational inequalities and empowering young learners.
+                </p>
+              </div>
+              <div className="md:w-1/2">
+                <img
+                  src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg"
+                  alt="Teachers collaborating in Rwanda"
+                  className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </motion.section>
 
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">5. Key Activities</h2>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-          <li>Book Collection Drives: Organize monthly collection points on the ALU campus where students, staff, and community members can donate books.</li>
-          <li>Sorting and Packaging: Volunteers sort donated books by age, condition, and subject. Bindi will design simple starter kits combining storybooks and activity materials.</li>
-          <li>Community Distribution: Work with teachers and local facilitators in Musanze and Kibeho to deliver the materials. Include optional literacy workshops during delivery.</li>
-          <li>Monitoring & Storytelling: Track the impact through follow-ups and share stories from beneficiaries to raise awareness and encourage further support.</li>
-        </ul>
-      </section>
+          <motion.section
+            id="problem"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <div className="flex flex-col md:flex-row gap-6">
+              <div className="md:w-1/2">
+                <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">2. Problem Statement</h2>
+                <p className="text-gray-700 font-poppins leading-relaxed mb-4">
+                  In Rwanda, many children in rural areas face literacy challenges due to poverty. Nearly 38% of Rwandans live below the poverty line, limiting access to basic educational materials like textbooks and storybooks.
+                </p>
+                <p className="text-gray-700 font-poppins leading-relaxed">
+                  Despite progress in education, there’s a gap in resources for early learners, hindering literacy development and educational outcomes.
+                </p>
+              </div>
+              <div className="md:w-1/2">
+                <img
+                  src="https://images.pexels.com/photos/927451/pexels-photo-927451.jpeg"
+                  alt="Rural community in Rwanda"
+                  className="w-full h-64 object-cover rounded-lg hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </motion.section>
 
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">6. Potential Partners in Rwanda</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
-          To ensure long-term success and local engagement, Bindi will seek partnerships with organizations that align with its mission:
-        </p>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-          <li>Save the Children Rwanda – Focuses on education and child protection; implements reading and literacy programs across Rwanda.</li>
-          <li>Imbuto Foundation – Runs the 'Promotion of Girls’ Education' program and supports child development and early education.</li>
-          <li>Book Aid International – Partners with local libraries and institutions to improve access to books.</li>
-          <li>Ready for Reading_Rwinkwavu Library and Learning Center – Provides literacy resources, library services, and learning programs for rural communities.</li>
-        </ul>
-      </section>
+          <motion.section
+            id="goals"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">3. Project Goals</h2>
+            <ul className="list-disc list-inside text-gray-700 font-poppins leading-relaxed space-y-2">
+              <li>Recycle and redistribute 1000 educational books to under-resourced schools.</li>
+              <li>Promote a culture of reading and literacy in underserved communities.</li>
+              <li>Involve students and institutions in Kigali (starting with ALU) in a sustainable initiative.</li>
+              <li>Align with social entrepreneurship and educational equity goals.</li>
+            </ul>
+            <img
+              src="https://images.pexels.com/photos/607812/pexels-photo-607812.jpeg"
+              alt="Students engaging in literacy activities"
+              className="w-full h-64 object-cover rounded-lg mt-6 hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </motion.section>
 
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">7. Impact Vision</h2>
-        <p className="text-gray-700 leading-relaxed mb-4">
-          By recycling educational materials and building community collaboration around literacy, Bindi hopes to:
-        </p>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-          <li>Support over 500 children in the first year.</li>
-          <li>Redistribute over 1,000 books to at least 4 schools or centers.</li>
-          <li>Inspire a growing network of students and educators passionate about improving education access.</li>
-        </ul>
-        <p className="text-gray-700 leading-relaxed mb-4">
-          Long-term impact goals include:
-        </p>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-          <li>Improving foundational literacy in early childhood education in targeted areas.</li>
-          <li>Contributing to Rwanda’s goal of achieving universal literacy by 2030, in line with the Sustainable Development Goal 4 (Quality Education).</li>
-        </ul>
-      </section>
+          <motion.section
+            id="communities"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">4. Target Communities</h2>
+            <p className="text-gray-700 font-poppins leading-relaxed mb-4">
+              Bindi will focus on two communities:
+            </p>
+            <ul className="list-disc list-inside text-gray-700 font-poppins leading-relaxed space-y-2">
+              <li>
+                <strong>Musanze District</strong>: Literacy rate of 63% among children aged 6–15, with limited educational materials.
+              </li>
+              <li>
+                <strong>Kibeho Sector</strong>: Poverty rate exceeds 40%, with a need for storybooks and creative materials.
+              </li>
+            </ul>
+            <img
+              src="https://images.pexels.com/photos/3184287/pexels-photo-3184287.jpeg"
+              alt="Community learning center in Rwanda"
+              className="w-full h-64 object-cover rounded-lg mt-6 hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </motion.section>
 
-      <section className="mb-10">
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">8. Next Steps</h2>
-        <ul className="list-disc list-inside text-gray-700 leading-relaxed space-y-2">
-          <li>Finalize partnerships with at least 2 local organizations (Save the Children Rwanda; Imbuto Foundation and Ready for Writing).</li>
-          <li>Launch the first book drive at ALU.</li>
-          <li>Design branded communication materials (flyer) to promote the initiative on LinkedIn and Instagram.</li>
-          <li>Begin pilot distribution in Musanze and Kibeho.</li>
-          <li>Collect baseline data to assess current access to books in target communities and create content showcasing the feedback and impact of the initiative.</li>
-        </ul>
-      </section>
+          <motion.section
+            id="activities"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">5. Key Activities</h2>
+            <ul className="list-disc list-inside text-gray-700 font-poppins leading-relaxed space-y-2">
+              <li>Book Collection Drives: Monthly drives at ALU for book donations.</li>
+              <li>Sorting and Packaging: Volunteers create starter kits with storybooks and materials.</li>
+              <li>Community Distribution: Deliver materials with optional literacy workshops.</li>
+              <li>Monitoring & Storytelling: Track impact and share beneficiary stories.</li>
+            </ul>
+            <img
+              src="https://images.pexels.com/photos/3184296/pexels-photo-3184296.jpeg"
+              alt="Volunteers sorting books for distribution"
+              className="w-full h-64 object-cover rounded-lg mt-6 hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </motion.section>
 
-      <section>
-        <h2 className="text-3xl font-semibold text-yellow-500 mb-4">Conclusion</h2>
-        <p className="text-gray-700 leading-relaxed">
-          The Bindi Literacy Initiative is more than a donation project—it is a movement that empowers youth to be part of a meaningful solution to one of Africa’s most pressing challenges: literacy. By combining creativity, community, and compassion, Bindi aims to shape a future where every child, regardless of their background, can read, imagine, and grow.
-        </p>
-      </section>
+          <motion.section
+            id="partners"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">6. Potential Partners</h2>
+            <p className="text-gray-700 font-poppins leading-relaxed mb-4">
+              Bindi will partner with:
+            </p>
+            <ul className="list-disc list-inside text-gray-700 font-poppins leading-relaxed space-y-2">
+              <li>Save the Children Rwanda: Focuses on literacy programs.</li>
+              <li>Imbuto Foundation: Supports child development.</li>
+              <li>Book Aid International: Improves book access.</li>
+              <li>Ready for Reading: Provides rural library services.</li>
+            </ul>
+            <img
+              src="https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg"
+              alt="Community partnership meeting"
+              className="w-full h-64 object-cover rounded-lg mt-6 hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </motion.section>
+
+          <motion.section
+            id="impact"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">7. Impact Vision</h2>
+            <p className="text-gray-700 font-poppins leading-relaxed mb-4">
+              Bindi aims to:
+            </p>
+            <ul className="list-disc list-inside text-gray-700 font-poppins leading-relaxed space-y-2">
+              <li>Support 500+ children in the first year.</li>
+              <li>Redistribute 1,000+ books to 4+ schools.</li>
+              <li>Inspire a network of literacy advocates.</li>
+            </ul>
+            <p className="text-gray-700 font-poppins leading-relaxed mb-4">
+              Long-term goals include improving foundational literacy and supporting SDG 4.
+            </p>
+            <img
+              src="https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg"
+              alt="Children celebrating literacy achievements"
+              className="w-full h-64 object-cover rounded-lg mt-6 hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </motion.section>
+
+          <motion.section
+            id="next-steps"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">8. Next Steps</h2>
+            <ul className="list-disc list-inside text-gray-700 font-poppins leading-relaxed space-y-2">
+              <li>Finalize partnerships with local organizations.</li>
+              <li>Launch the first book drive at ALU.</li>
+              <li>Design promotional materials for social media.</li>
+              <li>Begin pilot distribution in Musanze and Kibeho.</li>
+              <li>Collect baseline data on book access.</li>
+            </ul>
+            <img
+              src="https://images.pexels.com/photos/3184303/pexels-photo-3184303.jpeg"
+              alt="Planning literacy initiative"
+              className="w-full h-64 object-cover rounded-lg mt-6 hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </motion.section>
+
+          <motion.section
+            id="conclusion"
+            className="bg-white p-8 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300"
+            variants={sectionVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+          >
+            <h2 className="text-3xl font-semibold font-poppins text-yellow-500 mb-4">Conclusion</h2>
+            <p className="text-gray-700 font-poppins leading-relaxed">
+              The Bindi Literacy Initiative is a movement empowering youth to address literacy challenges in Rwanda. By combining creativity, community, and compassion, Bindi aims to ensure every child can read, imagine, and grow.
+            </p>
+            <div className="mt-6 flex gap-4">
+              <Link to="/donate">
+                <button
+                  className="px-6 py-3 bg-yellow-500 text-blue-900 font-poppins font-semibold rounded-lg hover:bg-yellow-400 hover:scale-105 transition-all duration-200"
+                  aria-label="Donate to support Bindi Initiative"
+                >
+                  Donate Now
+                </button>
+              </Link>
+              <Link to="/volunteer">
+                <button
+                  className="px-6 py-3 bg-blue-900 text-white font-poppins font-semibold rounded-lg hover:bg-blue-800 hover:scale-105 transition-all duration-200"
+                  aria-label="Volunteer with Bindi Initiative"
+                >
+                  Join Us
+                </button>
+              </Link>
+            </div>
+          </motion.section>
+        </div>
+      </div>
     </div>
   );
 }
