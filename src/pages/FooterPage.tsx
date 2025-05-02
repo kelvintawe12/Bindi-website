@@ -30,6 +30,11 @@ export function PageFooter() {
             </a>
           </li>
           <li>
+            <a href="/about" className="hover:text-blue-600">
+              About Us
+            </a>
+          </li>
+          <li>
             <a href="/partners" className="hover:text-blue-600">
               Partners
             </a>
