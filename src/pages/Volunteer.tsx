@@ -150,7 +150,7 @@ const Volunteer: React.FC = () => {
                 variant="primary"
                 size="lg"
                 ariaLabel="Sign up to volunteer with Bindi"
-                className="cursor-pointer min-w-[140px] max-w-[200px]"
+                className="cursor-pointer min-w-[140px] max-w-[200px] bg-green-600 hover:bg-green-700 text-white"
               >
                 Volunteer Now
                 <ArrowRight className="ml-1 h-4 w-4" />

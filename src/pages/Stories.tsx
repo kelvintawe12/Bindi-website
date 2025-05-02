@@ -130,7 +130,7 @@ const stories: StoryType[] = [
           transition={{ duration: 0.8 }}
           className="text-center"
         >
-          <Button variant="primary" size="lg" href="/contact">
+          <Button variant="primary" size="lg" href="/contact" className="bg-green-700 text-white hover:bg-green-800">
             Share Your Story
           </Button>
         </motion.section>

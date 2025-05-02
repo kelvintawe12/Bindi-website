@@ -77,7 +77,7 @@ const Blog: React.FC = () => {
             )}
           </form>
           <div className="mt-8">
-            <Button variant="primary" size="lg" href="/stories">
+            <Button variant="primary" size="lg" href="/stories" className="block mx-auto text-green-600 hover:text-green-700">
               See All Stories
             </Button>
           </div>

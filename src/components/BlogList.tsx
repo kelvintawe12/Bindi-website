@@ -28,7 +28,7 @@ export const BlogList: React.FC = () => {
       category: 'Social Impact',
       author: 'Marie Uwase',
       date: '2025-02-01',
-      image: 'https://images.unsplash.com/photo-1503676260728-1f56cf25a386?ixlib=rb-4.0.3&auto=format&fit=crop&w=1470&q=80',
+      image: '/bindi.jpg',
       slug: 'bindi-literacy-initiative-rwanda'
     },
     {
