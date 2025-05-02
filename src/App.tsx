@@ -15,24 +15,32 @@ import Resources from './pages/Resources';
 import Home from './pages/Home';
 
 import { Layout } from './components/Layout';
+import { AppProvider } from './context/AppContext';
+import { ErrorBoundary } from './components/ErrorBoundary';
+import { Chatbot } from './components/common/Chatbot';
 
 export function App() {
   return (
-    <Routes>
-      <Route path="/" element={<AppRoutes />} />
-      <Route path="/Binidi-Initiative" element={<BindiInitiative />} />
-      <Route path="/about" element={<Layout><About /></Layout>} />
-      <Route path="/blog" element={<Layout><Blog /></Layout>} />
-      <Route path="/contact" element={<Layout><Contact /></Layout>} />
-      <Route path="/donate" element={<Layout><Donate /></Layout>} />
-      <Route path="/volunteer" element={<Layout><Volunteer /></Layout>} />
-      <Route path="/impact" element={<Layout><Impact /></Layout>} />
-      <Route path="/stories" element={<Layout><Stories /></Layout>} />
-      <Route path="/events" element={<Layout><Events /></Layout>} />
-      <Route path="/partners" element={<Layout><Partners /></Layout>} />
-      <Route path="/resources" element={<Layout><Resources /></Layout>} />
-      <Route path="/home" element={<Layout><Home /></Layout>} />
-    </Routes>
+    <AppProvider>
+      <ErrorBoundary>
+        <Chatbot />
+        <Routes>
+          <Route path="/" element={<AppRoutes />} />
+          <Route path="/Binidi-Initiative" element={<BindiInitiative />} />
+          <Route path="/about" element={<Layout><About /></Layout>} />
+          <Route path="/blog" element={<Layout><Blog /></Layout>} />
+          <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="/donate" element={<Layout><Donate /></Layout>} />
+          <Route path="/volunteer" element={<Layout><Volunteer /></Layout>} />
+          <Route path="/impact" element={<Layout><Impact /></Layout>} />
+          <Route path="/stories" element={<Layout><Stories /></Layout>} />
+          <Route path="/events" element={<Layout><Events /></Layout>} />
+          <Route path="/partners" element={<Layout><Partners /></Layout>} />
+          <Route path="/resources" element={<Layout><Resources /></Layout>} />
+          <Route path="/home" element={<Layout><Home /></Layout>} />
+        </Routes>
+      </ErrorBoundary>
+    </AppProvider>
   );
 }
 

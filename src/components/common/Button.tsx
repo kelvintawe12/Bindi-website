@@ -11,6 +11,7 @@ interface ButtonProps {
   className?: string;
   ariaLabel?: string;
   external?: boolean;
+  disabled?: boolean;
 }
 
 export const Button: React.FC<ButtonProps> = React.memo(
